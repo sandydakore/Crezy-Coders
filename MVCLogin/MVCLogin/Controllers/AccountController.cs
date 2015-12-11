@@ -11,10 +11,11 @@ using Microsoft.Owin.Security;
 using MVCLogin.Models;
 using System.Net.Mail;
 using System.Web.Security;
+using MVCLogin.Filters;
 
 namespace MVCLogin.Controllers
 {
-    [Authorize]
+    [Authorize]    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -87,46 +88,41 @@ namespace MVCLogin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
-                
-                if (user!=null)
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
+
+                //var user = await UserManager.FindAsync(model.Email, model.Password);
+
+                switch (result)
                 {
-                    //await UserManager.IsEmailConfirmedAsync(user.Id)
-                    if(user.EmailConfirmed)
-                    {
-                        var role = RoleManager.FindByName("Member");
-                        UserManager.AddToRole(user.Id, role.Name);
-
-                        await SignInAsync(user, isPersistent: false);
-
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
-
-                        IdentityMessage message = new IdentityMessage();
-
-                        message.Destination = user.Email;
-                        message.Subject = "Confirm your account";
-                        message.Body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
-
-                        send_mail(message);
-
-                        ViewBag.errorMessage = "You must have a confirmed email to log on. "
-                                             + "The confirmation token has been resent to your email account.";
-                        return View("Error");
-                    }                    
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    case SignInStatus.Success:
+                        {
+                            var user = await UserManager.FindByNameAsync(model.Email);
+                            if (user != null)
+                            {
+                                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                                {
+                                    //first I tried this.
+                                    //return LogOff();
+                                    HttpContext.Server.TransferRequest("~/Account/LogOff");
+                                    return RedirectToAction("Login");
+                                }
+                            }
+                            return RedirectToLocal(returnUrl);
+                        }
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
                 }
             }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-              
+             
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -158,19 +154,18 @@ namespace MVCLogin.Controllers
                     IdentityMessage message = new IdentityMessage();
 
                     message.Destination = user.Email;
-                    message.Subject="Confirm your account";
+                    message.Subject = "Confirm your account";
                     message.Body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
 
-                    send_mail(message);                   
+                    send_mail(message);
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    ViewBag.errorMessage = "Check your email and confirm your account, you must be confirmed "
                                     + "before you can log in.";
                     
                     return View("Info");
                 }
                 AddErrors(result);
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -215,13 +210,13 @@ namespace MVCLogin.Controllers
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 
-                IdentityMessage message = new IdentityMessage();
+                //IdentityMessage message = new IdentityMessage();
 
-                message.Destination = user.Email;
-                message.Subject = "Reset Password";
-                message.Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
+                //message.Destination = user.Email;
+                //message.Subject = "Reset Password";
+                //message.Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
 
-                send_mail(message);
+                //send_mail(message);
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -373,8 +368,8 @@ namespace MVCLogin.Controllers
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
             var callbackUrl = Url.Action("ConfirmEmail", "Account",
                new { userId = userID, code = code }, protocol: Request.Url.Scheme);
-            await UserManager.SendEmailAsync(userID, subject,
-               "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            //await UserManager.SendEmailAsync(userID, subject,
+            //   "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
             return callbackUrl;
         }
@@ -387,7 +382,6 @@ namespace MVCLogin.Controllers
 
         private void send_mail(IdentityMessage message)
         {
-
             MailMessage mail = new MailMessage();
             mail.To.Add(message.Destination);
             mail.From = new MailAddress("sandy.dakore@gmail.com");
