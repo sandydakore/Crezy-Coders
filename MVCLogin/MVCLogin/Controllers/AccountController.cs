@@ -11,7 +11,6 @@ using Microsoft.Owin.Security;
 using MVCLogin.Models;
 using System.Net.Mail;
 using System.Web.Security;
-using MVCLogin.Filters;
 
 namespace MVCLogin.Controllers
 {
@@ -209,14 +208,14 @@ namespace MVCLogin.Controllers
 
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                
-                //IdentityMessage message = new IdentityMessage();
 
-                //message.Destination = user.Email;
-                //message.Subject = "Reset Password";
-                //message.Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
+                IdentityMessage message = new IdentityMessage();
 
-                //send_mail(message);
+                message.Destination = user.Email;
+                message.Subject = "Reset Password";
+                message.Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
+
+                send_mail(message);
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
