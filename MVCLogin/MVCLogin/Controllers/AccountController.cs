@@ -89,8 +89,6 @@ namespace MVCLogin.Controllers
             {
                 var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
 
-                //var user = await UserManager.FindAsync(model.Email, model.Password);
-
                 switch (result)
                 {
                     case SignInStatus.Success:
@@ -100,25 +98,18 @@ namespace MVCLogin.Controllers
                             {
                                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                                 {
-                                    //first I tried this.
-                                    //return LogOff();
                                     HttpContext.Server.TransferRequest("~/Account/LogOff");
                                     return RedirectToAction("Login");
                                 }
                             }
                             return RedirectToLocal(returnUrl);
-                        }
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                        }                    
                     case SignInStatus.Failure:
                     default:
                         ModelState.AddModelError("", "Invalid login attempt.");
                         return View(model);
                 }
             }
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
              
