@@ -15,25 +15,16 @@ using SendGrid;
 using System.Net;
 using System.Configuration;
 using System.Diagnostics;
+using System.Net.Mail;
 
 namespace MVCLogin
 {
     public class EmailService : IIdentityMessageService
     {
-        public async Task SendAsync(IdentityMessage message)
+        public  Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            await Task.FromResult(0);
-        }      
-    }
-
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
-        }
+        }      
     }
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
@@ -118,7 +109,8 @@ namespace MVCLogin
         }
         private void InitializeIdentity(ApplicationDbContext context)
         {
-            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var owin = HttpContext.Current.GetOwinContext();
+            var userManager = owin.GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
 
             var email = "admin@admin.net";
