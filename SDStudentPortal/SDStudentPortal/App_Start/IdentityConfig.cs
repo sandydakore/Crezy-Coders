@@ -117,8 +117,8 @@ namespace SDStudentPortal
             var userManager = owin.GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
 
-            var email = "admin@admin.net";
-            var password = "123456As";
+            var email = "SDStudentPortalTemp@gmail.com";
+            var password = "SDStudentPortalTemp@1";
             var roleName = "Admin";
 
             CreateUserAndRole(email, password, roleName, userManager, roleManager);
