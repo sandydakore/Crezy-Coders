@@ -50,6 +50,5 @@ C:\Users\Angele\Source\Repos\Crezy-Coders\SDStudentPortal\SDStudentPortal\bin\Mi
 C:\Users\Angele\Source\Repos\Crezy-Coders\SDStudentPortal\SDStudentPortal\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Angele\Source\Repos\Crezy-Coders\SDStudentPortal\SDStudentPortal\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Angele\Source\Repos\Crezy-Coders\SDStudentPortal\SDStudentPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Angele\Source\Repos\Crezy-Coders\SDStudentPortal\SDStudentPortal\obj\Debug\SDStudentPortal.csprojResolveAssemblyReference.cache
 C:\Users\Angele\Source\Repos\Crezy-Coders\SDStudentPortal\SDStudentPortal\obj\Debug\SDStudentPortal.dll
 C:\Users\Angele\Source\Repos\Crezy-Coders\SDStudentPortal\SDStudentPortal\obj\Debug\SDStudentPortal.pdb
