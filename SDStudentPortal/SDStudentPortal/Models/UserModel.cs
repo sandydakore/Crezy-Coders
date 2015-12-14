@@ -33,7 +33,7 @@ namespace SDStudentPortal.Models
         public string Skills { get; set; }
         public int SkillsPrivacySetting { get; set; }
         public string Certificates { get; set; }
-        public string CretificatesPrivacySetting { get; set; }
+        public string CertificatesPrivacySetting { get; set; }
         public string Memberships { get; set; }
         public int MembershipsPrivacySetting { get; set; }
         public string Experience { get; set; }
