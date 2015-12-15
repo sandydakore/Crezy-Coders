@@ -1,0 +1,194 @@
+﻿@model SDStudentPortal.Models.UserModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserEmailPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserEmailPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfilePictureURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfilePictureURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfilePictureURLPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfilePictureURLPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumberPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumberPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirthPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirthPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skills)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skills)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkillsPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkillsPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Certificates)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Certificates)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CertificatesPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CertificatesPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Memberships)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Memberships)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MembershipsPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MembershipsPrivacySetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Experience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperiencePrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExperiencePrivacySetting)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserModelID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

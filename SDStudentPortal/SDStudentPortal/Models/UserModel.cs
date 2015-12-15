@@ -9,7 +9,7 @@ namespace SDStudentPortal.Models
     public class UserModel
     {
         [Required]
-        public int UserID { get; set; }
+        public int UserModelID { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
