@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -45,10 +46,16 @@ namespace SDStudentPortal.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel)
+        public ActionResult Create([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && file != null)
             {
+                var filename = Path.GetFileName(file.FileName);
+                string imagePath = Server.MapPath("~/Images/" + filename);
+                file.SaveAs(imagePath);
+
+                userModel.ProfilePictureURL = "Images/" + filename;
+
                 db.UserModels.Add(userModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");

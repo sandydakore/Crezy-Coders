@@ -14,10 +14,9 @@ namespace SDStudentPortal.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        public int UserEmailPrivacySetting { get; set; }
-        [Required]
+        public MyEnum UserEmailPrivacySetting { get; set; }
         public string ProfilePictureURL { get; set; }
-        public int ProfilePictureURLPrivacySetting { get; set; }
+        public MyEnum ProfilePictureURLPrivacySetting { get; set; }
         [Required]
         public int ClassNumber { get; set; }
         [Required]
@@ -25,19 +24,21 @@ namespace SDStudentPortal.Models
         [Required]
         public string Gender { get; set; }
         public string Address { get; set; }
-        public int AddressPrivacySetting { get; set; }
+        public MyEnum AddressPrivacySetting { get; set; }
         public int PhoneNumber { get; set; }
-        public int PhoneNumberPrivacySetting { get; set; }
+        public MyEnum PhoneNumberPrivacySetting { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-        public int DateOfBirthPrivacySetting { get; set; }
+        public MyEnum DateOfBirthPrivacySetting { get; set; }
         public string Skills { get; set; }
-        public int SkillsPrivacySetting { get; set; }
+        public MyEnum SkillsPrivacySetting { get; set; }
         public string Certificates { get; set; }
-        public int CertificatesPrivacySetting { get; set; }
+        public MyEnum CertificatesPrivacySetting { get; set; }
         public string Memberships { get; set; }
-        public int MembershipsPrivacySetting { get; set; }
+        public MyEnum MembershipsPrivacySetting { get; set; }
         public string Experience { get; set; }
-        public int ExperiencePrivacySetting { get; set; }
+        public MyEnum ExperiencePrivacySetting { get; set; }
 
     }
 }
