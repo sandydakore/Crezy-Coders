@@ -1,0 +1,104 @@
+﻿@model Tuple<IEnumerable<SDStudentPortal.Models.Blog>, IEnumerable<SDStudentPortal.Models.BlogComment>>
+
+<link href="~/Content/Custom.css" rel="stylesheet" />
+
+<table class="webgrid-table">
+    @foreach (var item in Model.Item1)
+    {
+        <tr>
+            <td colspan="2"><label id="BlogID" class="display-mode" hidden="hidden">@item.BlogID</label> </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="glyphicon glyphicon-user" style="color:skyblue"> @item.User.UserName  </span>
+                <p><i class="glyphicon glyphicon-calendar"></i> on @item.BlogCreatedDate</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><b>@Html.DisplayFor(modelItem => item.Content)</b> </td>
+        </tr>
+        <tr>
+            <td width="350px">
+                <button class="comment display-mode">Comment</button>
+                <div id="div" class="edit-mode">
+                    <textarea id="comment"></textarea><br />
+                    <button class="save-user">Post</button>
+                </div>
+            </td>
+            <td>
+                @{
+        var totalcomment = Model.Item2.Where(c => c.BlogID == item.BlogID).Count();
+                }
+
+                Load <a href="@Url.Action("LoadAllComments", "BlogComments", new { BlogID = item.BlogID })">All @totalcomment Comments</a>
+                <div id="wrapper">
+                    <div class="tree">
+                        <ul>
+                            @foreach (var comment in Model.Item2.Where(c => c.BlogID == item.BlogID).OrderByDescending(c => c.CommentDate).Take(3))
+                            {
+                                <li>
+                                    <a>@comment.CommentDate</a>
+                                    <ul>
+                                        <li><b>@comment.User.UserName</b> </li>
+                                        <li>@comment.Content</li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.tree li').each(function () {
+            if ($(this).children('ul').length > 0) {
+                $(this).addClass('parent');
+            }
+        });
+
+        $('.tree li.parent > a').click(function () {
+            $(this).parent().toggleClass('active');
+            $(this).parent().children('ul').slideToggle('slow');
+        });
+
+        $('.edit-mode').hide();
+
+        $('.comment').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            tr.find('.edit-mode').toggle();
+        });
+
+        $('.save-user').on('click', function () {
+            var tr = $(this).parents('tr:first');
+
+            var id = (tr).prev('tr').prev('tr').prev('tr').find('#BlogID').html();
+
+            var comment = tr.find('#comment').val();
+
+            tr.find('.edit-mode').toggle();
+
+            $.ajax({
+                url: '@Url.Action("PostComment", "BlogComments")',
+                data: JSON.stringify({ Bid: id, comment: comment }),
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == "Success") {
+                        location.reload(true);
+                    } else {
+                        alert("Error occurs on the Database level!");
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText + "Something going wrong");
+                }
+            });
+        });
+    })
+</script>
