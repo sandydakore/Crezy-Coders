@@ -34,5 +34,11 @@ namespace SDStudentPortal.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SDStudentPortal.Models.UserModel> UserModels { get; set; }
+
+        public System.Data.Entity.DbSet<SDStudentPortal.Models.Uploads> Uploads { get; set; }
+
+      //  public System.Data.Entity.DbSet<SDStudentPortal.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

@@ -1,0 +1,66 @@
+﻿@model SDStudentPortal.Models.Uploads
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Uploads</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadFileUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadFileUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadFileUrlPrivacySetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadFileUrlPrivacySetting)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UploadsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
