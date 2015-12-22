@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SDStudentPortal.Models.BlogComment>
+
+@{
+    ViewBag.Title = "Blog Comments";
+}
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel panel-heading">
+                    <b>@Model.First().blog.Content.ToUpper()</b>
+                    @Model.First().blog.BlogCreatedDate
+                </div>
+
+                <div class="container center-block">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-11">
+                                <div class="panel panel-success">
+                                    <div class="panel panel-heading">
+                                        <span class="glyphicon glyphicon-comment">
+                                            by
+                                            <span class="glyphicon glyphicon-user">
+                                                @Html.DisplayFor(modelItem => item.User.UserName)
+                                            </span>
+                                            on
+                                        </span>
+
+                                        <span class="glyphicon glyphicon-calendar">
+                                            <b>@Html.DisplayFor(modelItem => item.CommentDate)</b>
+                                        </span>
+
+                                    </div>
+                                    <ul class="list-group list-group-flush text-left">
+                                        <li class="list-group-item">@Html.DisplayFor(modelItem => item.Content)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
