@@ -113,8 +113,6 @@ namespace SDStudentPortal
         }
         private void InitializeIdentity(ApplicationDbContext context)
         {
-            var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var user = new ApplicationUser();
@@ -122,8 +120,6 @@ namespace SDStudentPortal
             var email = "SDStudentPortalTemp@gmail.com";
             var password = "SDStudentPortalTemp@1";
             var roleName = "Admin";
-
-            var u = manager.FindByName(email);
 
             //Create Role Admin if it does not exist
             if (!roleManager.RoleExists(roleName))
