@@ -113,49 +113,52 @@ namespace SDStudentPortal
         }
         private void InitializeIdentity(ApplicationDbContext context)
         {
-            var owin = HttpContext.Current.GetOwinContext();
-            var userManager = owin.GetUserManager<ApplicationUserManager>();
-            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var user = new ApplicationUser();
 
             var email = "SDStudentPortalTemp@gmail.com";
             var password = "SDStudentPortalTemp@1";
             var roleName = "Admin";
 
-            CreateUserAndRole(email, password, roleName, userManager, roleManager);
+            var u = manager.FindByName(email);
+
+            //Create Role Admin if it does not exist
+            if (!roleManager.RoleExists(roleName))
+            {
+                roleManager.Create(new IdentityRole(roleName));
+            }
+
+            user.UserName = email;
+            var adminresult = userManager.Create(user, password);
+
+            //Add User Admin to Role Admin
+            if (adminresult.Succeeded)
+            {
+                userManager.AddToRole(user.Id, roleName);
+            }
 
             email = "member@member.net";
             password = "123456As";
             roleName = "Member";
 
-            CreateUserAndRole(email, password, roleName, userManager, roleManager);
-        }
-
-        private void CreateUserAndRole(string email, string password, string roleName, ApplicationUserManager userManager, ApplicationRoleManager roleManager)
-        {
-            //Create Role if it does not exist
-
-            IdentityRole role = null;
-            //var role = roleManager.FindByName(roleName);
-            if (role == null)
+            //Create Role Admin if it does not exist
+            if (!roleManager.RoleExists(roleName))
             {
-                role = new IdentityRole(roleName);
-                var roleresult = roleManager.Create(role);
+                roleManager.Create(new IdentityRole(roleName));
             }
-            ApplicationUser user = null;
-            //var user = userManager.FindByName(email);
-            if (user == null)
-            {
-                user = new ApplicationUser { UserName = email, Email = email };
-                var result = userManager.Create(user, password);
-                result = userManager.SetLockoutEnabled(user.Id, false);
-            }
+            user = new ApplicationUser();
+            user.UserName = email;
+            adminresult = userManager.Create(user, password);
 
-            // Add user to Role if not already added
-            var rolesForUser = userManager.GetRoles(user.Id);
-            if (!rolesForUser.Contains(role.Name))
+            //Add User Member to Role Member
+            if (adminresult.Succeeded)
             {
-                var result = userManager.AddToRole(user.Id, role.Name);
+                userManager.AddToRole(user.Id, roleName);
             }
-        }
+        }       
     }    
 }
