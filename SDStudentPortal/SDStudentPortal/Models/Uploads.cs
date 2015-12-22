@@ -18,5 +18,6 @@ namespace SDStudentPortal.Models
         public DateTime DateCreated { get; set; }
         public string UploadFileUrl { get; set; }
         public MyEnum UploadFileUrlPrivacySetting { get; set; }
+        public string FileType { get; set; }
     }
 }
