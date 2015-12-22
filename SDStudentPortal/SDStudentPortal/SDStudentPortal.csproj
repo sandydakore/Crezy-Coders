@@ -169,6 +169,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MyEnum.cs" />
+    <Compile Include="Models\Uploads.cs" />
+    <Compile Include="Controllers\UploadsController.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Controllers\UserModelsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,9 +236,15 @@
     <Content Include="Views\UserModels\Edit.cshtml" />
     <Content Include="Views\UserModels\Index.cshtml" />
     <Content Include="Views\Shared\Date.cshtml" />
+    <Content Include="Views\Uploads\Create.cshtml" />
+    <Content Include="Views\Uploads\Delete.cshtml" />
+    <Content Include="Views\Uploads\Details.cshtml" />
+    <Content Include="Views\Uploads\Edit.cshtml" />
+    <Content Include="Views\Uploads\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FileURL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
