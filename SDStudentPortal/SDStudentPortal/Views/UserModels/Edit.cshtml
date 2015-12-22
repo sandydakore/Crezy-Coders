@@ -14,10 +14,11 @@
         <div class="col-lg-12 col-sm-12">
             <div class="card hovercard">
                 <div class="card-background">
-                    <img class="card-bkimg" alt="" src="../../@Html.DisplayFor(model => model.ProfilePictureURL)">
+                    <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
+                    <!-- http://lorempixel.com/850/280/people/9/ -->
                 </div>
                 <div class="useravatar">
-                    <img alt="" src="../../@Html.DisplayFor(model => model.ProfilePictureURL)"/>
+                    <img alt="" src="~/Images/default-profile-large.png" />
                 </div>
                 <div class="card-info">
                     <span class="card-title">User Information</span>
@@ -26,19 +27,19 @@
             </div>
             <div role="group" aria-label="...">
                 <div class="btn-group" role="group">
-                    <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
+                    <button type="button" id="btnGeneralInformation" class="btn btn-default" href="#tab1" data-toggle="tab">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         <div class="hidden-xs">General Information</div>
                     </button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
+                    <button type="button" id="btnContactInformation" class="btn btn-default" href="#tab2" data-toggle="tab">
                         <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                         <div class="hidden-xs">Contact Information</div>
                     </button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab">
+                    <button type="button" id="btnExperience" class="btn btn-default" href="#tab3" data-toggle="tab">
                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                         <div class="hidden-xs">Experience</div>
                     </button>
@@ -49,7 +50,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab1">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
@@ -57,7 +58,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
@@ -65,7 +66,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.UserEmailPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Email Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.UserEmailPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.UserEmailPrivacySetting, "", new { @class = "text-danger" })
@@ -73,7 +74,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ProfilePictureURL, "Image", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Profile Picture", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @*ProfilePictureFileUpload*@
                                 <input id="file" name="file" type="file" class="form-control" />
@@ -82,7 +83,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ProfilePictureURLPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Profile Picture Setting", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.ProfilePictureURLPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ProfilePictureURLPrivacySetting, "", new { @class = "text-danger" })
@@ -90,7 +91,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ClassNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Class Number", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.ClassNumber, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ClassNumber, "", new { @class = "text-danger" })
@@ -98,7 +99,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ProfileName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Profile Name", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.ProfileName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ProfileName, "", new { @class = "text-danger" })
@@ -122,10 +123,14 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
-                            <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                            <div class="hidden-xs">Next</div>
-                        </button>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                                    <div class="hidden-xs">Next</div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade in" id="tab2">
                         <div class="form-group">
@@ -137,7 +142,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.AddressPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Address Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.AddressPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.AddressPrivacySetting, "", new { @class = "text-danger" })
@@ -145,7 +150,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
@@ -153,7 +158,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PhoneNumberPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Phone Number Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.PhoneNumberPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PhoneNumberPrivacySetting, "", new { @class = "text-danger" })
@@ -161,7 +166,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Date Of Birth", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
@@ -169,16 +174,20 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.DateOfBirthPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Date Of Birth Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.DateOfBirthPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.DateOfBirthPrivacySetting, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            <div class="hidden-xs">Next</div>
-                        </button>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    <div class="hidden-xs">Next</div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade in" id="tab3">
                         <div class="form-group">
@@ -190,7 +199,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.SkillsPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Skills Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.SkillsPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.SkillsPrivacySetting, "", new { @class = "text-danger" })
@@ -206,7 +215,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.CertificatesPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Certificates Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.CertificatesPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.CertificatesPrivacySetting, "", new { @class = "text-danger" })
@@ -223,7 +232,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.MembershipsPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Memberships Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.MembershipsPrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.MembershipsPrivacySetting, "", new { @class = "text-danger" })
@@ -239,7 +248,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ExperiencePrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Experience Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EnumDropDownListFor(model => model.ExperiencePrivacySetting, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ExperiencePrivacySetting, "", new { @class = "text-danger" })

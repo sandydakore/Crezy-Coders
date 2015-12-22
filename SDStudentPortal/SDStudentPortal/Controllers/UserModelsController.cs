@@ -60,8 +60,15 @@ namespace SDStudentPortal.Models
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else if (ModelState.IsValid && file == null)
+            {
+                userModel.ProfilePictureURL = "Images/default-profile-large.png";
 
-            return View(userModel);
+                db.UserModels.Add(userModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+                return View(userModel);
         }
 
         // GET: UserModels/Edit/5
