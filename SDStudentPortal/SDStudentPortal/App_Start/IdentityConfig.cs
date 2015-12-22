@@ -114,8 +114,7 @@ namespace SDStudentPortal
         private void InitializeIdentity(ApplicationDbContext context)
         {
             var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
-
+            
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var user = new ApplicationUser();
