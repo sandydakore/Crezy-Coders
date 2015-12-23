@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateCreated, "Date Created", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UploadFileUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UploadFileUrl, "File Upload", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="file" name="file" class="form-control" />
                 @Html.ValidationMessageFor(model => model.UploadFileUrl, "", new { @class = "text-danger" })
@@ -58,10 +58,29 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UploadFileUrlPrivacySetting, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UploadFileUrlPrivacySetting, "File Privacy", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.UploadFileUrlPrivacySetting, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.UploadFileUrlPrivacySetting, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.FileType, "File Type", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <label>
+                    @Html.RadioButtonFor(model => model.FileType, "Text")
+                    <span>Text</span>
+                </label>
+                <label>
+                    @Html.RadioButtonFor(model => model.FileType, "Photo")
+                    <span>Photo</span>
+                </label>
+                <label>
+                    @Html.RadioButtonFor(model => model.FileType, "Video")
+                    <span>Video</span>
+                </label>
             </div>
         </div>
 

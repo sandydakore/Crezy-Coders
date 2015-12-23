@@ -51,7 +51,7 @@ namespace SDStudentPortal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UploadsID,Title,Description,UploadFileUrl,UploadFileUrlPrivacySetting")] Uploads uploads, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "UploadsID,Title,Description,UploadFileUrl,UploadFileUrlPrivacySetting,FileType")] Uploads uploads, HttpPostedFileBase file)
         {
             if (ModelState.IsValid && file != null)
             {
@@ -90,7 +90,7 @@ namespace SDStudentPortal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UploadsID,Title,Description,DateCreated,UploadFileUrl,UploadFileUrlPrivacySetting")] Uploads uploads, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "UploadsID,Title,Description,DateCreated,UploadFileUrl,UploadFileUrlPrivacySetting,FileType")] Uploads uploads, HttpPostedFileBase file)
         {
             if (ModelState.IsValid && file != null)
             {

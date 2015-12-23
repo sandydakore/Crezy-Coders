@@ -1,0 +1,19 @@
+﻿@model Tuple<IEnumerable<SDStudentPortal.Models.Blog>, IEnumerable<SDStudentPortal.Models.BlogComment>>
+
+
+<dl class="dl-horizontal">
+
+    @foreach (var item in Model.Item1.Where(b => b.Public == true))
+    {
+        <dt>
+            @Html.DisplayNameFor(model => item.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => item.Content)
+        </dd>
+
+    }
+
+</dl>
+
