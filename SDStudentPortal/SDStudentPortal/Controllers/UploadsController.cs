@@ -59,8 +59,10 @@ namespace SDStudentPortal.Controllers
                 var filename = Path.GetFileName(file.FileName);
                 string fileURL = Server.MapPath("~/FileURL/" + filename);
                 file.SaveAs(fileURL);
+
                 uploads.UploadFileUrl = "FileURL/" + filename;
                 uploads.DateCreated = DateTime.Now;
+
                 db.Uploads.Add(uploads);
                 db.SaveChanges();
                 return RedirectToAction("Index");

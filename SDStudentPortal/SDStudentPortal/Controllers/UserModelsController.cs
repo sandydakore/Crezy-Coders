@@ -59,7 +59,7 @@ namespace SDStudentPortal.Models
 
                 db.UserModels.Add(userModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Uploads");
             }
             else if (ModelState.IsValid && file == null)
             {
@@ -67,7 +67,7 @@ namespace SDStudentPortal.Models
 
                 db.UserModels.Add(userModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create","Uploads");
             }
                 return View(userModel);
         }
@@ -98,7 +98,7 @@ namespace SDStudentPortal.Models
             {
                 db.Entry(userModel).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Uploads");
             }
             return View(userModel);
         }
