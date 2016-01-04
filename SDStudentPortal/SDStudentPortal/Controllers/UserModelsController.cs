@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace SDStudentPortal.Models
 {
+    [Authorize]
     public class UserModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

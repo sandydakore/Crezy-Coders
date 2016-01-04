@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SDStudentPortal.Controllers
 {
+    [Authorize]
     public class UploadsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
