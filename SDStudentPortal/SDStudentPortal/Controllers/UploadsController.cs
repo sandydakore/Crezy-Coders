@@ -61,6 +61,8 @@ namespace SDStudentPortal.Controllers
                 file.SaveAs(fileURL);
                 uploads.UploadFileUrl = "FileURL/" + filename;
                 uploads.DateCreated = DateTime.Now;
+                var uid = User.Identity.GetUserId();
+                uploads.UserId = uid;
                 db.Uploads.Add(uploads);
                 db.SaveChanges();
                 return RedirectToAction("Index");
