@@ -27,7 +27,7 @@
             </td>
             <td>
                 @{
-        var totalcomment = Model.Item2.Where(c => c.BlogID == item.BlogID).Count();
+                    var totalcomment = Model.Item2.Where(c => c.BlogID == item.BlogID).Count();
                 }
                 @if (totalcomment > 0)
                 {
