@@ -1,4 +1,4 @@
-﻿@model Tuple<IEnumerable<SDStudentPortal.Models.Blog>, IEnumerable<SDStudentPortal.Models.BlogComment>>
+﻿@model Tuple<IEnumerable<SDStudentPortal.Models.Blog>, IEnumerable<SDStudentPortal.Models.BlogComment>,SDStudentPortal.Models.UserModel>
 
 <link href="~/Content/Custom.css" rel="stylesheet" />
 
@@ -27,26 +27,28 @@
             </td>
             <td>
                 @{
-        var totalcomment = Model.Item2.Where(c => c.BlogID == item.BlogID).Count();
+                    var totalcomment = Model.Item2.Where(c => c.BlogID == item.BlogID).Count();
                 }
-
-                Load <a href="@Url.Action("LoadAllComments", "BlogComments", new { BlogID = item.BlogID })">All @totalcomment Comments</a>
-                <div id="wrapper">
-                    <div class="tree">
-                        <ul>
-                            @foreach (var comment in Model.Item2.Where(c => c.BlogID == item.BlogID).OrderByDescending(c => c.CommentDate).Take(3))
-                            {
-                                <li>
-                                    <a>@comment.CommentDate</a>
-                                    <ul>
-                                        <li><b>@comment.User.UserName</b> </li>
-                                        <li>@comment.Content</li>
-                                    </ul>
-                                </li>
-                            }
-                        </ul>
+                @if (totalcomment > 0)
+                {
+                    <a href="@Url.Action("LoadAllComments", "BlogComments", new { BlogID = item.BlogID })">Load All @totalcomment Comments</a>
+                    <div id="wrapper">
+                        <div class="tree">
+                            <ul>
+                                @foreach (var comment in Model.Item2.Where(c => c.BlogID == item.BlogID).OrderByDescending(c => c.CommentDate).Take(3))
+                                {
+                                    <li>
+                                        <a>@comment.CommentDate</a>
+                                        <ul>
+                                            <li><b>@comment.User.UserName</b> </li>
+                                            <li>@comment.Content</li>
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                }                
             </td>
         </tr>
     }

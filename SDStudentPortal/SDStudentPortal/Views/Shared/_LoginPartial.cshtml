@@ -2,13 +2,14 @@
 @using Microsoft.AspNet.Identity.EntityFramework
 @using SDStudentPortal.Models
 
+
 <link href="~/Content/Custom.css" rel="stylesheet" />
 @if (Request.IsAuthenticated)
 {
     var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
     var manager = new UserManager<ApplicationUser>(userStore);
     var currentUser = manager.FindById(User.Identity.GetUserId());
-
+   
     if (currentUser.EmailConfirmed)
     {
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -20,8 +21,8 @@
                     @Html.ActionLink("Blog", "Index", "Blog");
                 </li>
                 <li>
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Create", "UserProfile", routeValues: null, htmlAttributes: new { title = "Manage" })
-                </li>
+                    @Html.Partial("_PartialProfilePage")                   
+                </li>               
                 <li>
                     <button type="button" class="btn btn-danger btn-lg btn3d" onclick="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log Off</button>
                 </li>
