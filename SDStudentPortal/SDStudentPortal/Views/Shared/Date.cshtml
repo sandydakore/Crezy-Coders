@@ -1,3 +1,7 @@
 ﻿@model DateTime
+
+<script src="@Url.Content("~/Scripts/DatePickerReady.js")"
+        type="text/javascript"></script>
+
 @Html.TextBox("", String.Format("{0:d}", Model.ToShortDateString()),
   new { @class = "datefield", type = "date" })
