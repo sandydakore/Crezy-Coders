@@ -255,6 +255,7 @@
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\BlogComments\LoadAllComments.cshtml" />
+    <Content Include="Views\Shared\_PartialProfilePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
