@@ -350,7 +350,7 @@ a{
     padding: 0 0 0 28px;
 }
 .tree li.parent > a:before {
-    background-image: url("../image/plus_minus_icons.png");
+    background-image: url("../Images/plus_minus_icons.png");
     background-position: 25px center;
      content: ""; 
     display: block;
