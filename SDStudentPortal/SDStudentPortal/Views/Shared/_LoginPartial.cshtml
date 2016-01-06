@@ -20,7 +20,7 @@
                     @Html.ActionLink("Blog", "Index", "Blog");
                 </li>
                 <li>
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Create", "UserProfile", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Create", "UserModels", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </li>
                 <li>
                     <button type="button" class="btn btn-danger btn-lg btn3d" onclick="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log Off</button>
