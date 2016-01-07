@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Blog Search Result";
+    
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("BlogSearchResult", "Blog", FormMethod.Get))
+{   
+    @Html.Label("Blog Filter : ");
+    @Html.TextBox("txtSearch");
+    <input type="submit" value="Search" />
+}
+
+<br />
+@Html.Partial("_IndexPartialPrivate")

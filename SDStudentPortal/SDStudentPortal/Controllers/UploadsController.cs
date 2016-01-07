@@ -18,11 +18,27 @@ namespace SDStudentPortal.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Uploads
-        public ActionResult Index()
+
+        public ActionResult Index(string searchString)
         {
             var uid = User.Identity.GetUserId();
-            var uploads = db.Uploads.Where(u => u.UserId==uid);
-            return View(uploads.ToList());
+            var uploads = db.Uploads.Where(u => u.UserId == uid);
+                        
+            var searchUploads = from u in db.Uploads
+                         select u;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchUploads = searchUploads.Where(u => u.Title.Contains(searchString));
+                searchUploads = searchUploads.Where(u => u.Description.Contains(searchString));
+                //need to add "Public" or "UserOnly" criteria
+                return View(searchUploads.ToList());
+            }
+            else
+            {
+                return View(db.Uploads.Where(u => u.UserId == uid));
+            }
+            
         }
 
         // GET: Uploads/Details/5
