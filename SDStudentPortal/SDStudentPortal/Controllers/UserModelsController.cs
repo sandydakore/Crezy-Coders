@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,7 +17,7 @@ namespace SDStudentPortal.Models
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: UserModels
-        public ActionResult Index()
+        public ActionResult AdminIndex()
         {
             return View(db.UserModels.ToList());
         }
@@ -56,7 +57,7 @@ namespace SDStudentPortal.Models
                 file.SaveAs(imagePath);
 
                 userModel.ProfilePictureURL = "Images/" + filename;
-
+                userModel.UserId = User.Identity.GetUserId();
                 db.UserModels.Add(userModel);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Uploads");
@@ -64,8 +65,8 @@ namespace SDStudentPortal.Models
             else if (ModelState.IsValid && file == null)
             {
                 userModel.ProfilePictureURL = "Images/default-profile-large.png";
-
-                db.UserModels.Add(userModel);
+                userModel.UserId = User.Identity.GetUserId();
+                db.UserModels.Add(userModel);            
                 db.SaveChanges();
                 return RedirectToAction("Create","Uploads");
             }
@@ -75,16 +76,21 @@ namespace SDStudentPortal.Models
         // GET: UserModels/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            //UserModel userModel = db.UserModels.Find(id);
+            //if (userModel == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            var uid = User.Identity.GetUserId();
+            var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
+
+            if (uid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserModel userModel = db.UserModels.Find(id);
-            if (userModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userModel);
+
+            return View(user);
         }
 
         // POST: UserModels/Edit/5

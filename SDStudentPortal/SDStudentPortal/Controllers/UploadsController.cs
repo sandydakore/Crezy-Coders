@@ -31,9 +31,14 @@ namespace SDStudentPortal.Controllers
             {
                 searchUploads = searchUploads.Where(u => u.Title.Contains(searchString));
                 searchUploads = searchUploads.Where(u => u.Description.Contains(searchString));
+                //need to add "Public" or "UserOnly" criteria
+                return View(searchUploads.ToList());
             }
-            //add "Public" or "UserOnly" criteria
-            return View(searchUploads.ToList());
+            else
+            {
+                return View(db.Uploads.Where(u => u.UserId == uid));
+            }
+            
         }
 
         // GET: Uploads/Details/5
