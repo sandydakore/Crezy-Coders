@@ -21,7 +21,6 @@ namespace SDStudentPortal.Controllers
         public ActionResult Index()
         {
             var uid = User.Identity.GetUserId();
-
             return View(db.blog.Where(b => b.UserId == uid));
         }
 
@@ -130,6 +129,16 @@ namespace SDStudentPortal.Controllers
             db.blog.Remove(blog);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult BlogSearchResult(string txtSearch)
+        {
+            IEnumerable<Blog> blogs = db.blog.Where(b => b.Content.ToLower().Contains(txtSearch.ToLower())).ToList();
+            IEnumerable<BlogComment> comments = db.blogcomment.ToList();
+
+            var tuple = new Tuple<IEnumerable<Blog>, IEnumerable<BlogComment>>(blogs, comments);
+
+            return View(tuple);
         }
 
         protected override void Dispose(bool disposing)

@@ -258,6 +258,7 @@
     <Content Include="Views\BlogComments\LoadAllComments.cshtml" />
     <Content Include="Views\Shared\_PartialProfilePage.cshtml" />
     <Content Include="Views\UserModels\SearchUsers.cshtml" />
+    <Content Include="Views\Blog\BlogSearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
