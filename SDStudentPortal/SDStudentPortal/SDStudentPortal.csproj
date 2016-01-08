@@ -164,6 +164,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SearchUsersController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,6 +188,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom.css" />
+    <Content Include="Content\CustomBootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -211,7 +213,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="StyleSheet1.css" />
+    <Content Include="Content\StyleSheet1.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -243,7 +245,7 @@
     <Content Include="Views\UserModels\Delete.cshtml" />
     <Content Include="Views\UserModels\Details.cshtml" />
     <Content Include="Views\UserModels\Edit.cshtml" />
-    <Content Include="Views\UserModels\Index.cshtml" />
+    <Content Include="Views\UserModels\AdminIndex.cshtml" />
     <Content Include="Views\Shared\Date.cshtml" />
     <Content Include="Views\Uploads\Create.cshtml" />
     <Content Include="Views\Uploads\Delete.cshtml" />
@@ -269,6 +271,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="FileURL\" />
+    <Folder Include="Views\SearchUsers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

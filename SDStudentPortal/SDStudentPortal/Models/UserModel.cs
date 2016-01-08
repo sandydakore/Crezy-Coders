@@ -9,7 +9,9 @@ namespace SDStudentPortal.Models
 {
     public class UserModel
     {
-        //[ForeignKey ("User")]
+        [ForeignKey("User")]
+        public virtual string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
         [Required]
         public int UserModelID { get; set; }
         [Required]
