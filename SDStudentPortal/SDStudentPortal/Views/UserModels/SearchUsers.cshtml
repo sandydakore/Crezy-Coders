@@ -1,0 +1,103 @@
+﻿@model IEnumerable<SDStudentPortal.Models.UserModel>
+
+@{
+    ViewBag.Title = "SeachUsers";
+}
+
+<h2>Search Users</h2>
+<p>
+    @using (Html.BeginForm())
+    {
+    <p>
+        Search Users: @Html.TextBox("SearchString") <br />
+        <input type="submit" value="Filter" />
+    </p>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfilePictureURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Skills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Certificates)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Memberships)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Experience)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:150px; width:150px"/>
+         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Skills)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Certificates)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Memberships)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Experience)
+        </td>
+    </tr>
+}
+</table>
