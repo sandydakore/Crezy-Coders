@@ -10,135 +10,113 @@ using SDStudentPortal.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
-
 namespace SDStudentPortal.Controllers
 {
     [Authorize]
-    public class BlogController : Controller
+    public class ProjectsController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
+        // GET: Projects
         public ActionResult Index()
         {
-            var uid = User.Identity.GetUserId();
-            return View(db.blog.Where(b => b.UserId == uid));
+            var project = db.project.Include(p => p.User);
+            return View(project.ToList());
         }
 
-        // GET: Blog/Details/5
+        // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = db.blog.Find(id);
-            if (blog == null)
+            Project project = db.project.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(blog);
+            return View(project);
         }
 
-        // GET: Blog/Create
+        // GET: Projects/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Blog/Create
+        // POST: Projects/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BlogID,Content,Public")] Blog blog)
+        public ActionResult Create([Bind(Include = "ProjectID,UserId,Title,Description")] Project project)
         {
             if (ModelState.IsValid)
             {
-                var uid = User.Identity.GetUserId();
-
-                blog.UserId = uid;
-                blog.BlogCreatedDate = DateTime.Now;
-                blog.BlogUpdatedDate = Convert.ToDateTime("01/01/2000");
-
-                db.blog.Add(blog);
+                db.project.Add(project);
                 db.SaveChanges();
-
                 return RedirectToAction("Index");
             }
-            return View(blog);
+
+            return View(project);
         }
 
-        // GET: Blog/Edit/5
+        // GET: Projects/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = db.blog.Find(id);
-            if (blog == null)
+            Project project = db.project.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(blog);
+            return View(project);
         }
 
-        // POST: Blog/Edit/5
+        // POST: Projects/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BlogID,Content,BlogCreatedDate,Public")] Blog blog)
+        public ActionResult Edit([Bind(Include = "ProjectID,UserId,Title,Description")] Project project)
         {
             if (ModelState.IsValid)
             {
-                var uid = User.Identity.GetUserId();
-
-                blog.UserId = uid;
-                blog.BlogUpdatedDate = DateTime.Now;
-
-                db.Entry(blog).State = EntityState.Modified;
+                db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(blog);
+            return View(project);
         }
 
-        // GET: Blog/Delete/5
+        // GET: Projects/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = db.blog.Find(id);
-            if (blog == null)
+            Project project = db.project.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(blog);
+            return View(project);
         }
 
-        // POST: Blog/Delete/5
+        // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Blog blog = db.blog.Find(id);
-
-            if (blog == null)
-            {
-                return HttpNotFound();
-            }
-            db.blog.Remove(blog);
+            Project project = db.project.Find(id);
+            db.project.Remove(project);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult BlogSearchResult(string txtSearch)
-        {
-            IEnumerable<Blog> blogs = db.blog.Where(b => b.Content.ToLower().Contains(txtSearch.ToLower())).ToList();
-            IEnumerable<BlogComment> comments = db.blogcomment.ToList();
-
-            var tuple = new Tuple<IEnumerable<Blog>, IEnumerable<BlogComment>>(blogs, comments);
-
-            return View(tuple);
         }
 
         protected override void Dispose(bool disposing)

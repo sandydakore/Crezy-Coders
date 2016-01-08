@@ -17,9 +17,8 @@ namespace SDStudentPortal.Controllers
         {
             IEnumerable<Blog> blogs = db.blog.OrderByDescending(b => b.BlogCreatedDate).ToList();
             IEnumerable<BlogComment> comments = db.blogcomment.ToList();
-            UserModel userModel = db.UserModels.Find(3);
 
-            var tuple = new Tuple<IEnumerable<Blog>, IEnumerable<BlogComment>,UserModel>(blogs, comments,userModel);
+            var tuple = new Tuple<IEnumerable<Blog>, IEnumerable<BlogComment>>(blogs, comments);
 
             return View(tuple);
         }

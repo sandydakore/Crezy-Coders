@@ -19,7 +19,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     @Html.ActionLink("Blog", "Index", "Blog");
-                </li>               
+                </li>
+                <li>
+                    @Html.ActionLink("Search Blog", "BlogSearchResult", "Blog");
+                </li>
+                <li>@Html.ActionLink("Hello " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                              
                 <li>
                     <button type="button" class="btn btn-danger btn-lg btn3d" onclick="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log Off</button>
                 </li>

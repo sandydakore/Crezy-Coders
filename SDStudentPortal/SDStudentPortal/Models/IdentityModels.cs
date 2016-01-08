@@ -42,6 +42,9 @@ namespace SDStudentPortal.Models
         public System.Data.Entity.DbSet<SDStudentPortal.Models.Blog> blog { get; set; }
         public System.Data.Entity.DbSet<SDStudentPortal.Models.BlogComment> blogcomment { get; set; }
 
+        public System.Data.Entity.DbSet<SDStudentPortal.Models.Project> project { get; set; }
+        public System.Data.Entity.DbSet<SDStudentPortal.Models.ProjectFile> projectFiles { get; set; }
+
       //  public System.Data.Entity.DbSet<SDStudentPortal.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

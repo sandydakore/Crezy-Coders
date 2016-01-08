@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,13 +17,27 @@ namespace SDStudentPortal.Models
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: UserModels
-        public ActionResult Index()
+        public ActionResult AdminIndex()
         {
             return View(db.UserModels.ToList());
         }
 
         // GET: UserModels/Details/5
         public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            UserModel userModel = db.UserModels.Find(id);
+            if (userModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(userModel);
+        }
+
+        public ActionResult StudentProfile(int? id)
         {
             if (id == null)
             {
@@ -56,7 +71,7 @@ namespace SDStudentPortal.Models
                 file.SaveAs(imagePath);
 
                 userModel.ProfilePictureURL = "Images/" + filename;
-
+                userModel.UserId = User.Identity.GetUserId();
                 db.UserModels.Add(userModel);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Uploads");
@@ -64,8 +79,8 @@ namespace SDStudentPortal.Models
             else if (ModelState.IsValid && file == null)
             {
                 userModel.ProfilePictureURL = "Images/default-profile-large.png";
-
-                db.UserModels.Add(userModel);
+                userModel.UserId = User.Identity.GetUserId();
+                db.UserModels.Add(userModel);            
                 db.SaveChanges();
                 return RedirectToAction("Create","Uploads");
             }
@@ -75,16 +90,21 @@ namespace SDStudentPortal.Models
         // GET: UserModels/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            //UserModel userModel = db.UserModels.Find(id);
+            //if (userModel == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            var uid = User.Identity.GetUserId();
+            var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
+
+            if (uid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserModel userModel = db.UserModels.Find(id);
-            if (userModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userModel);
+
+            return View(user);
         }
 
         // POST: UserModels/Edit/5
@@ -92,10 +112,24 @@ namespace SDStudentPortal.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel)
+        public ActionResult Edit([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+
+                if (file != null)
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    string imagePath = Server.MapPath("~/Images/" + filename);
+                    file.SaveAs(imagePath);
+
+                    userModel.ProfilePictureURL = "Images/" + filename;                    
+                }
+                //else
+                //{
+                //    user
+                //}
+                userModel.UserId = User.Identity.GetUserId();
                 db.Entry(userModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Uploads");
