@@ -9,7 +9,7 @@
 <hr />
 <div class="container" id="Profile">
     <div class="row" id="NameAndBio">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <dd>
                 @Html.DisplayFor(model => model.ProfileName)
             </dd>
@@ -18,7 +18,7 @@
                 <img src="../../@Html.DisplayFor(model => model.ProfilePictureURL)" style="height:150px; width:150px" />
             </dd>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <dt>
                 @Html.DisplayNameFor(model => model.FirstName)
             </dt>
@@ -81,7 +81,7 @@
 
 
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <dt>
                 @Html.DisplayNameFor(model => model.Skills)
             </dt>
@@ -116,20 +116,30 @@
         </div>
     </div>
     <div class="row" id="Projects">
-
+        <h2>Projects</h2>
+        <hr />
+        <p>
+            this is where the list of projects will go. weeee look at all my projects! im so awesome!  
+        </p>
     </div>
     <div class="row" id="Blogs">
-
+       
+        <h2>Blogs</h2>
+        <hr />
+        <p>
+            this is where the list of Blogs will go. weeee look at all my Blogs! I love bloggong about anything!
+        </p>
+       
     </div>
 
     <div>
 
     </div>
     <footer></footer>
-    <h4>Student Profile</h4>
+    @*<h4>Student Profile</h4>
     <hr />
 
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal">*@
         @*<dt>
                 @Html.DisplayNameFor(model => model.FirstName)
             </dt>
@@ -306,8 +316,8 @@
                 @Html.DisplayFor(model => model.ExperiencePrivacySetting)
             </dd>*@
 
-    </dl>
-</div>
+    @*</dl>*@
+@*</div>*@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.UserModelID }) |
     @Html.ActionLink("Back to List", "Index")
