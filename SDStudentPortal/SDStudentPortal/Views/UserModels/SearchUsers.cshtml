@@ -18,7 +18,7 @@
     @foreach (var item in Model)
     {
         <div class="image">
-            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:250px; width:125px" />
+            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:250px; width:160px" />
         </div>
         <div class="name">
         @Html.ActionLink(item.FirstName, "StudentProfile", "UserModels", new { id = item.UserId })

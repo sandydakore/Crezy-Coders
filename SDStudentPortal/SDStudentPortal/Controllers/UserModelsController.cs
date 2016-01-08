@@ -109,16 +109,26 @@ namespace SDStudentPortal.Models
             //{
             //    return HttpNotFound();
             //}
-
-            var uid = User.Identity.GetUserId();
-            var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
-
-            if (uid == null)
+            if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                var uid = User.Identity.GetUserId();
+                var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
 
-            return View(user);
+                if (uid == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                return View(user);
+            }
+            else
+            {
+                UserModel user = db.UserModels.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
+            }           
         }
 
         // POST: UserModels/Edit/5
