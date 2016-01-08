@@ -56,6 +56,20 @@ namespace SDStudentPortal.Models
         //    return View(user);
         //}
 
+        // GET: SearchUsers
+        public ActionResult SearchUsers(string searchString)
+        {
+            var searchUsers = from u in db.UserModels
+                              select u;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {                
+                searchUsers = searchUsers.Where(u => u.LastName.Contains(searchString) || u.ProfileName.Contains(searchString) || u.FirstName.Contains(searchString));
+            }
+            //need to add "Public" or "UserOnly" criteria
+            return View(searchUsers.ToList());
+        }
+
         // GET: UserModels/Create
         public ActionResult Create()
         {
