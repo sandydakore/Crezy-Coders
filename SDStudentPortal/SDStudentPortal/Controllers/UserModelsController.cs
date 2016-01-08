@@ -37,24 +37,19 @@ namespace SDStudentPortal.Models
             return View(userModel);
         }
 
-        //// GET: UserModels/StudentProfile/5
-        //public ActionResult StudentProfile(int? id)
-        //{
-
-        //    var uid = User.Identity.GetUserId();
-        //    var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
-
-        //    if (uid == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    //UserModel userModel = db.UserModels.Find(id);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(user);
-        //}
+        public ActionResult StudentProfile(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            UserModel userModel = db.UserModels.Find(id);
+            if (userModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(userModel);
+        }
 
         // GET: UserModels/Create
         public ActionResult Create()
