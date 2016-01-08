@@ -164,6 +164,8 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SearchUsersController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +175,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MyEnum.cs" />
+    <Compile Include="Models\ProjectFile.cs" />
+    <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Uploads.cs" />
     <Compile Include="Controllers\UploadsController.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -256,12 +260,20 @@
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\BlogComments\LoadAllComments.cshtml" />
+    <Content Include="Views\Shared\_PartialProfilePage.cshtml" />
+    <Content Include="Views\Blog\BlogSearchResult.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\UserModels\SearchUsers.cshtml" />
     <Content Include="Views\UserModels\StudentProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="FileURL\" />
+    <Folder Include="Views\SearchUsers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
