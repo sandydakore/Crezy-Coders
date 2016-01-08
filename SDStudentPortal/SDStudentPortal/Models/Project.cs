@@ -17,6 +17,6 @@ namespace SDStudentPortal.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<ProjectFile> files { get; set; }
+        public virtual IEnumerable<ProjectFile> files { get; set; }
     }
 }
