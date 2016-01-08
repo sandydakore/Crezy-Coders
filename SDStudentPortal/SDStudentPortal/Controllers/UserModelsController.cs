@@ -112,10 +112,24 @@ namespace SDStudentPortal.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel)
+        public ActionResult Edit([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+
+                if (file != null)
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    string imagePath = Server.MapPath("~/Images/" + filename);
+                    file.SaveAs(imagePath);
+
+                    userModel.ProfilePictureURL = "Images/" + filename;                    
+                }
+                //else
+                //{
+                //    user
+                //}
+                userModel.UserId = User.Identity.GetUserId();
                 db.Entry(userModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Uploads");
