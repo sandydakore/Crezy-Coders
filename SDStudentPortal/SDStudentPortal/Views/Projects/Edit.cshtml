@@ -51,17 +51,17 @@
             @Html.Label("Files")
             <div id="col-md-10">
                 @grid.GetHtml(tableStyle: "webGrid",
-            headerStyle: "header",
-            alternatingRowStyle: "alt",
-            selectedRowStyle: "select",
-            columns: grid.Columns(
-                grid.Column("UploadsID", "ID"),
-                grid.Column("Title", "Title"),
-                grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
-                grid.Column(header: "Actions", format: (item) =>  
-                new HtmlString(  
-                Html.ActionLink("Edit", "Edit", new { id = item.id } ).ToString() +  
-                Html.ActionLink("Delete", "Delete", new { id = item.id } ) .ToString()))
+                                headerStyle: "header",
+                                alternatingRowStyle: "alt",
+                                selectedRowStyle: "select",
+                                columns: grid.Columns(
+                                    grid.Column("UploadsID", "ID"),
+                                    grid.Column("Title", "Title"),
+                                    grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
+                                    grid.Column(header: "Actions", format: (item) =>  
+                                    new HtmlString(
+                                             Html.ActionLink("Edit", "Edit", new { id = item.UploadsID }).ToString() +
+                                             Html.ActionLink("Delete", "Delete", new { id = item.UploadsID }).ToString()))
 
          ))
             </div>
