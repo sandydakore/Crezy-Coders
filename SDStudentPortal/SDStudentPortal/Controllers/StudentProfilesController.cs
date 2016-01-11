@@ -6,143 +6,132 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SDStudentPortal.Models;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
-namespace SDStudentPortal.Controllers
+namespace SDStudentPortal.Models
 {
-    [Authorize]
-    public class ProjectsController : Controller
+    public class StudentProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Projects
+        // GET: StudentProfiles
         public ActionResult Index()
         {
-            Project prj = db.project.Find(1);
-            if (prj == null)
-            {
-                Project initPrj = new Project();
-
-                initPrj.Title = "Please Select Project";
-
-                db.project.Add(initPrj);
-                db.SaveChanges();
-            }
-            var uid = User.Identity.GetUserId();
-
-            var project = db.project.Where(p => p.UserId==uid);
-            return View(project.ToList());
+            var studentProfiles = db.StudentProfiles.Include(s => s.User);
+            return View(studentProfiles.ToList());
         }
 
-        // GET: Projects/Details/5
+        // GET: StudentProfiles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.project.Find(id);
-            if (project == null)
+            StudentProfile studentProfile = db.StudentProfiles.Find(id);
+            if (studentProfile == null)
             {
                 return HttpNotFound();
             }
-
-            var uid = User.Identity.GetUserId();
-
-            ViewBag.ProjectFile = new List<Uploads>(db.Uploads.Where(u => u.ProjectID == id && u.UserId == uid).ToList());
-
-            return View(project);
+            return View(studentProfile);
         }
 
-        // GET: Projects/Create
+        // GET: StudentProfiles/Create
         public ActionResult Create()
         {
+           
             return View();
         }
 
-        // POST: Projects/Create
+        // POST: StudentProfiles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,Title,Description")] Project project)
+        public ActionResult Create([Bind(Include = "StudentProfileID")] StudentProfile studentProfile)
         {
             if (ModelState.IsValid)
             {
-                var uid = User.Identity.GetUserId();
-
-                project.UserId = uid;
-
-                db.project.Add(project);
+                var uid= User.Identity.GetUserId();
+                studentProfile.UserId = uid;
+                db.StudentProfiles.Add(studentProfile);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(project);
+            
+            return View(studentProfile);
         }
 
-        // GET: Projects/Edit/5
+        // GET: StudentProfiles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var uid = User.Identity.GetUserId();
+                var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
+
+                if (uid == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                return View(user);
             }
-            Project project = db.project.Find(id);
-            if (project == null)
+            else
             {
-                return HttpNotFound();
+                StudentProfile studentProfile = db.StudentProfiles.Find(id);
+                if (studentProfile == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(studentProfile);
             }
-            var uid = User.Identity.GetUserId();
-
-            ViewBag.ProjectFile = new List<Uploads>( db.Uploads.Where(u => u.ProjectID == id && u.UserId== uid).ToList());
-
-            return View(project);
+            
         }
 
-        // POST: Projects/Edit/5
+        // POST: StudentProfiles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProjectID,Title,Description")] Project project)
+        public ActionResult Edit([Bind(Include = "StudentProfileID")] StudentProfile studentProfile)
         {
             if (ModelState.IsValid)
             {
                 var uid = User.Identity.GetUserId();
-
-                project.UserId = uid;
-                db.Entry(project).State = EntityState.Modified;
+                studentProfile.UserId = uid;
+                db.Entry(studentProfile).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(project);
+            
+            return View(studentProfile);
         }
 
-        // GET: Projects/Delete/5
+        // GET: StudentProfiles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.project.Find(id);
-            if (project == null)
+            StudentProfile studentProfile = db.StudentProfiles.Find(id);
+            if (studentProfile == null)
             {
                 return HttpNotFound();
             }
-            return View(project);
+            return View(studentProfile);
         }
 
-        // POST: Projects/Delete/5
+        // POST: StudentProfiles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Project project = db.project.Find(id);
-            db.project.Remove(project);
+            StudentProfile studentProfile = db.StudentProfiles.Find(id);
+            db.StudentProfiles.Remove(studentProfile);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

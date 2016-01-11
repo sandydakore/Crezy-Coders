@@ -41,14 +41,24 @@ namespace SDStudentPortal.Models
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var uid = User.Identity.GetUserId();
+                var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
+
+                if (uid == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                return View(user);
             }
-            UserModel userModel = db.UserModels.Find(id);
-            if (userModel == null)
+            else
             {
-                return HttpNotFound();
+                UserModel userModel = db.UserModels.Find(id);
+                if (userModel == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(userModel);
             }
-            return View(userModel);
         }
 
         // GET: SearchUsers

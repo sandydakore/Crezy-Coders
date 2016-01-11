@@ -6,23 +6,33 @@
 
 <h2>Search Users</h2>
 @using (Html.BeginForm())
-<p>    
-    {
+{
     <p>
         Search Users: @Html.TextBox("SearchString") <br />
         <input type="submit" value="Filter" />
     </p>
-    }
-</p>
-<div class="container">
-    @foreach (var item in Model)
-    {
-        <div class="image">
-            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:250px; width:160px" />
-        </div>
-        <div class="name">
-        @Html.ActionLink(item.FirstName, "StudentProfile", "UserModels", new { id = item.UserId })
-        @item.LastName</div>
+}
 
-    }
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-12">
+            @foreach (var item in Model)
+            {
+                <div style="display:inline-block; padding:4px 7px 2px 4px; text-align:center">
+                    <div class="image">
+                        <a a href='@Url.Action("StudentProfile", "UserModels")'>
+                            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:250px; width:160px" />
+                        </a>
+                    </div>
+                    <div class="name">
+                        @item.FirstName
+                        @item.LastName
+                    </div>
+                    <div>
+                        @item.ProfileName
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>

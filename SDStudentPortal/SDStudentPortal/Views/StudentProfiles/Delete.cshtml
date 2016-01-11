@@ -1,4 +1,4 @@
-﻿@model SDStudentPortal.Models.Project
+﻿@model SDStudentPortal.Models.StudentProfile
 
 @{
     ViewBag.Title = "Delete";
@@ -8,24 +8,15 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Project</h4>
+    <h4>StudentProfile</h4>
     <hr />
     <dl class="dl-horizontal">
-        
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.User.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
 
     </dl>
