@@ -5,99 +5,34 @@
 }
 
 <h2>Search Users</h2>
-<p>
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm())
+{
     <p>
         Search Users: @Html.TextBox("SearchString") <br />
         <input type="submit" value="Filter" />
     </p>
-    }
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfilePictureURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClassNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfileName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Skills)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Certificates)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Memberships)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Experience)
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:150px; width:150px"/>
-         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClassNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Skills)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Certificates)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Memberships)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Experience)
-        </td>
-    </tr>
 }
-</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-12">
+            @foreach (var item in Model)
+            {
+                <div style="display:inline-block; padding:4px 7px 2px 4px; text-align:center">
+                    <div class="image">
+                        <a a href='@Url.Action("StudentProfile", "UserModels")'>
+                            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:250px; width:160px" />
+                        </a>
+                    </div>
+                    <div class="name">
+                        @item.FirstName
+                        @item.LastName
+                    </div>
+                    <div>
+                        @item.ProfileName
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

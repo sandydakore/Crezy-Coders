@@ -37,24 +37,43 @@ namespace SDStudentPortal.Models
             return View(userModel);
         }
 
-        //// GET: UserModels/StudentProfile/5
-        //public ActionResult StudentProfile(int? id)
-        //{
+        public ActionResult StudentProfile(int? id)
+        {
+            if (id == null)
+            {
+                var uid = User.Identity.GetUserId();
+                var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
 
-        //    var uid = User.Identity.GetUserId();
-        //    var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
+                if (uid == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                return View(user);
+            }
+            else
+            {
+                UserModel userModel = db.UserModels.Find(id);
+                if (userModel == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(userModel);
+            }
+        }
 
-        //    if (uid == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    //UserModel userModel = db.UserModels.Find(id);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(user);
-        //}
+        // GET: SearchUsers
+        public ActionResult SearchUsers(string searchString)
+        {
+            var searchUsers = from u in db.UserModels
+                              select u;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {                
+                searchUsers = searchUsers.Where(u => u.LastName.Contains(searchString) || u.ProfileName.Contains(searchString) || u.FirstName.Contains(searchString));
+            }
+            //need to add "Public" or "UserOnly" criteria
+            return View(searchUsers.ToList());
+        }
 
         // GET: UserModels/Create
         public ActionResult Create()
@@ -100,16 +119,26 @@ namespace SDStudentPortal.Models
             //{
             //    return HttpNotFound();
             //}
-
-            var uid = User.Identity.GetUserId();
-            var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
-
-            if (uid == null)
+            if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                var uid = User.Identity.GetUserId();
+                var user = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
 
-            return View(user);
+                if (uid == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                return View(user);
+            }
+            else
+            {
+                UserModel user = db.UserModels.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
+            }           
         }
 
         // POST: UserModels/Edit/5

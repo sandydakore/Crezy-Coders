@@ -29,9 +29,9 @@ namespace SDStudentPortal.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                searchUploads = searchUploads.Where(u => u.Title.Contains(searchString));
-                searchUploads = searchUploads.Where(u => u.Description.Contains(searchString));
-                //need to add "Public" or "UserOnly" criteria
+                searchUploads = searchUploads.Where(u => u.Title.Contains(searchString) || u.Description.Contains(searchString) && (u.UploadFileUrlPrivacySetting.Equals("Public") || u.UploadFileUrlPrivacySetting.Equals("UserOnly")));
+                
+                //need to add "UserOnly" criteria only when someone is logged in
                 return View(searchUploads.ToList());
             }
             else

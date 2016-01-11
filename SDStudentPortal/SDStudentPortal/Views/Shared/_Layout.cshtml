@@ -12,6 +12,12 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modernizr")
 
+    <script src="@Url.Content("~/Scripts/jquery.ui.core.min.js")"
+            type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.ui.datepicker.min.js")"
+            type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/DatePickerReady.js")"
+            type="text/javascript"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,6 +33,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Search Users","SearchUsers","UserModels")</li>
                     <li>@Html.ActionLink("User Info", "Edit", "UserModels")</li>
                     <li>@Html.ActionLink("Uploads", "Index", "Uploads")</li>
                     <li>@Html.ActionLink("Project","Index","Projects")</li>
