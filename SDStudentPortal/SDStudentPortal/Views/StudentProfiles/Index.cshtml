@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SDStudentPortal.Models.StudentProfile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StudentProfileID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StudentProfileID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StudentProfileID })
+        </td>
+    </tr>
+}
+
+</table>
