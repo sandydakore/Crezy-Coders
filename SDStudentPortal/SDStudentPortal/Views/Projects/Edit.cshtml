@@ -7,6 +7,19 @@
     grid.Pager(WebGridPagerModes.NextPrevious);
     
 }
+
+<style type="text/css">
+    a.imglnk
+			{
+			    background: url('" + @Url.Content("~/Images/edit-icon.png") + "') no-repeat top left;
+				 display: block;
+				 width: 45px;
+				 height: 25px;
+				 text-indent: -9999px; /* hides the link text */
+			}
+
+</style>
+
 <link href="~/Content/Custom.css" rel="stylesheet" />
 
 <h2>Edit</h2>
@@ -58,12 +71,8 @@
                                     grid.Column("UploadsID", "ID"),
                                     grid.Column("Title", "Title"),
                                     grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
-                                    grid.Column(header: "Actions", format: (item) =>  
-                                    new HtmlString(
-                                             Html.ActionLink("Edit", "Edit", new { id = item.UploadsID }).ToString() +
-                                             Html.ActionLink("Delete", "Delete", new { id = item.UploadsID }).ToString()))
-
-         ))
+                                    grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID },null) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID }, null)</text>)
+                              ))
             </div>
         </div>
 
