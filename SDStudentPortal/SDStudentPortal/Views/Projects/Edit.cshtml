@@ -57,7 +57,11 @@
             columns: grid.Columns(
                 grid.Column("UploadsID", "ID"),
                 grid.Column("Title", "Title"),
-                grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>)
+                grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
+                grid.Column(header: "Actions", format: (item) =>  
+                new HtmlString(  
+                Html.ActionLink("Edit", "Edit", new { id = item.id } ).ToString() +  
+                Html.ActionLink("Delete", "Delete", new { id = item.id } ) .ToString()))
 
          ))
             </div>
