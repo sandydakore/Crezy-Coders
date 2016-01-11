@@ -19,5 +19,8 @@ namespace SDStudentPortal.Models
         public string UploadFileUrl { get; set; }
         public MyEnum UploadFileUrlPrivacySetting { get; set; }
         public string FileType { get; set; }
+
+        public virtual int ProjectID { get; set; }
+        public virtual Project project { get; set; }
     }
 }

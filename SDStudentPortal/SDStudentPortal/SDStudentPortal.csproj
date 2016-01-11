@@ -174,7 +174,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MyEnum.cs" />
-    <Compile Include="Models\ProjectFile.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\StudentProfile.cs" />
     <Compile Include="Controllers\StudentProfilesController.cs" />
@@ -353,7 +352,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21332</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
