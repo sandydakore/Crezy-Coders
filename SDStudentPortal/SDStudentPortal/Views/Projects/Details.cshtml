@@ -40,9 +40,9 @@
             columns: grid.Columns(
                 grid.Column("UploadsID", "ID"),
                 grid.Column("Title", "Title"),
-                grid.Column("UploadFileUrl", "File", format: @<text><img src="@item.UploadFileUrl" /></text>)
-
-     ))
+                grid.Column("UploadFileUrl", "File", format: @<text><img src="@item.UploadFileUrl" /></text>),
+                grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID }, null) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID }, null)</text>)
+            ))
         </dd>
     </dl>
 </div>
