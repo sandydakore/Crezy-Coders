@@ -48,6 +48,11 @@ namespace SDStudentPortal.Controllers
             {
                 return HttpNotFound();
             }
+
+            var uid = User.Identity.GetUserId();
+
+            ViewBag.ProjectFile = new List<Uploads>(db.Uploads.Where(u => u.ProjectID == id && u.UserId == uid).ToList());
+
             return View(project);
         }
 

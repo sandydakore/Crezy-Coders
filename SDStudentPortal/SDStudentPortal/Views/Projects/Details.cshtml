@@ -2,6 +2,9 @@
 
 @{
     ViewBag.Title = "Details";
+    var grid = new WebGrid(ViewBag.ProjectFile, canPage: true, rowsPerPage: 5,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.NextPrevious);
 }
 
 <h2>Details</h2>
@@ -26,7 +29,21 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+        <dt>
+            @Html.DisplayName("Files")
+        </dt>
+        <dd>
+            @grid.GetHtml(tableStyle: "webGrid",
+            headerStyle: "header",
+            alternatingRowStyle: "alt",
+            selectedRowStyle: "select",
+            columns: grid.Columns(
+                grid.Column("UploadsID", "ID"),
+                grid.Column("Title", "Title"),
+                grid.Column("UploadFileUrl", "File", format: @<text><img src="@item.UploadFileUrl" /></text>)
 
+     ))
+        </dd>
     </dl>
 </div>
 <p>

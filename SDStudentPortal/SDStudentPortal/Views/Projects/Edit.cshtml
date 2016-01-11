@@ -1,50 +1,13 @@
 ﻿@model SDStudentPortal.Models.Project
 
 @{
-    var ProjectFile = (List<SDStudentPortal.Models.Uploads>)ViewBag.ProjectFile;
     ViewBag.Title = "Edit";
     var grid = new WebGrid(ViewBag.ProjectFile, canPage: true, rowsPerPage: 5,
     selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
     grid.Pager(WebGridPagerModes.NextPrevious);
     
 }
-
-<style type="text/css">
-    .webGrid {
-        margin: 4px;
-        border-collapse: collapse;
-        width: 500px;
-        background-color: #B4CFC3;
-    }
-
-    .header {
-        background-color: #C1D4E6;
-        font-weight: bold;
-        color: #FFF;
-    }
-
-    .webGrid th, .webGrid td {
-        border: 1px solid #C0C0C0;
-        padding: 5px;
-    }
-
-    .alt {
-        background-color: #E4E9F5;
-        color: #000;
-    }
-
-    .gridHead a:hover {
-        text-decoration: underline;
-    }
-
-    .description {
-        width: auto;
-    }
-
-    .select {
-        background-color: #71857C;
-    }
-</style>
+<link href="~/Content/Custom.css" rel="stylesheet" />
 
 <h2>Edit</h2>
 
