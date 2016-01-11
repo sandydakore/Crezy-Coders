@@ -20,7 +20,19 @@ namespace SDStudentPortal.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-            var project = db.project.Include(p => p.User);
+            Project prj = db.project.Find(1);
+            if (prj == null)
+            {
+                Project initPrj = new Project();
+
+                initPrj.Title = "Please Select Project";
+
+                db.project.Add(initPrj);
+                db.SaveChanges();
+            }
+            var uid = User.Identity.GetUserId();
+
+            var project = db.project.Where(p => p.UserId==uid);
             return View(project.ToList());
         }
 
@@ -50,10 +62,14 @@ namespace SDStudentPortal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,UserId,Title,Description")] Project project)
+        public ActionResult Create([Bind(Include = "ProjectID,Title,Description")] Project project)
         {
             if (ModelState.IsValid)
             {
+                var uid = User.Identity.GetUserId();
+
+                project.UserId = uid;
+
                 db.project.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -74,6 +90,10 @@ namespace SDStudentPortal.Controllers
             {
                 return HttpNotFound();
             }
+            var uid = User.Identity.GetUserId();
+
+            ViewBag.ProjectFile = new List<Uploads>( db.Uploads.Where(u => u.ProjectID == id && u.UserId== uid).ToList());
+
             return View(project);
         }
 
@@ -82,10 +102,13 @@ namespace SDStudentPortal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProjectID,UserId,Title,Description")] Project project)
+        public ActionResult Edit([Bind(Include = "ProjectID,Title,Description")] Project project)
         {
             if (ModelState.IsValid)
             {
+                var uid = User.Identity.GetUserId();
+
+                project.UserId = uid;
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
