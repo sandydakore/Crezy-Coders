@@ -4,18 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-
 namespace SDStudentPortal.Models
 {
-    public class Project
+    public class StudentProfile
     {
-        public int ProjectID { get; set; }
-
+        public int StudentProfileID { get; set; }
         [ForeignKey("User")]
         public virtual string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-
+        public virtual IEnumerable<Project> Projects { get; set; }
+        public virtual IEnumerable<Blog> Blogs { get; set; }
     }
 }

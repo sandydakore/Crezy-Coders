@@ -109,7 +109,7 @@ namespace SDStudentPortal
             base.Seed(context);
         }
         public static void InitializeData(ApplicationDbContext context)
-        {
+        {            
         }
         private void InitializeIdentity(ApplicationDbContext context)
         {

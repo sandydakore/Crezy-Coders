@@ -57,18 +57,24 @@ namespace SDStudentPortal.Controllers
         }
 
         // GET: Uploads/Create
-        public ActionResult Create()
+        public ActionResult Create(int? ProjectID)
         {
-            //ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email");
-            return View();
-        }
+            var uid = User.Identity.GetUserId();
+                        
+            List<Project> pList = db.project.Where(p => p.UserId == uid).ToList();
 
+            pList.Insert(0, db.project.Find(1));
+
+            ViewBag.ProjectList = new SelectList(pList, "ProjectID", "Title", ProjectID ?? 1);
+
+            return View();            
+        }
+        
         // POST: Uploads/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UploadsID,Title,Description,UploadFileUrl,UploadFileUrlPrivacySetting,FileType")] Uploads uploads, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "UploadsID,Title,Description,UploadFileUrl,UploadFileUrlPrivacySetting,FileType,ProjectID")] Uploads uploads, HttpPostedFileBase file)
         {
             if (ModelState.IsValid && file != null)
             {
@@ -79,6 +85,7 @@ namespace SDStudentPortal.Controllers
                 uploads.DateCreated = DateTime.Now;
                 var uid = User.Identity.GetUserId();
                 uploads.UserId = uid;
+
                 db.Uploads.Add(uploads);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,6 +103,11 @@ namespace SDStudentPortal.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Uploads uploads = db.Uploads.Find(id);
+
+            var uid = User.Identity.GetUserId();
+
+            ViewBag.ProjectList = new SelectList(db.project.Where(p => p.UserId == uid), "ProjectID", "Title", uploads.ProjectID);
+            
             if (uploads == null)
             {
                 return HttpNotFound();

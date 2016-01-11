@@ -2,27 +2,27 @@
 
 @{
     ViewBag.Title = "Edit";
+    var grid = new WebGrid(ViewBag.ProjectFile, canPage: true, rowsPerPage: 5,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.NextPrevious);
+    
 }
+<link href="~/Content/Custom.css" rel="stylesheet" />
 
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Project</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
         @Html.HiddenFor(model => model.ProjectID)
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+        @Html.HiddenFor(model => model.UserId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -35,16 +35,35 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = "5" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.files, "Files", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Add File to Project", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.files, null, htmlAttributes: new { @class = "form-control", @size = 5 })
+                @Html.ActionLink("Add File to Project", "Create", "Uploads", new { ProjectID = @Model.ProjectID }, null)
+            </div>
+        </div>
 
+        <div class="form-group">
+            @Html.Label("Files")
+            <div id="col-md-10">
+                @grid.GetHtml(tableStyle: "webGrid",
+                                headerStyle: "header",
+                                alternatingRowStyle: "alt",
+                                selectedRowStyle: "select",
+                                columns: grid.Columns(
+                                    grid.Column("UploadsID", "ID"),
+                                    grid.Column("Title", "Title"),
+                                    grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
+                                    grid.Column(header: "Actions", format: (item) =>  
+                                    new HtmlString(
+                                             Html.ActionLink("Edit", "Edit", new { id = item.UploadsID }).ToString() +
+                                             Html.ActionLink("Delete", "Delete", new { id = item.UploadsID }).ToString()))
+
+         ))
             </div>
         </div>
 
@@ -55,7 +74,6 @@
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
