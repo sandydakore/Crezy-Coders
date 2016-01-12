@@ -321,10 +321,7 @@
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\UserModels\SearchUsers.cshtml" />
     <Content Include="Views\UserModels\StudentProfile.cshtml" />
-    <Content Include="Views\StudentProfiles\Create.cshtml" />
-    <Content Include="Views\StudentProfiles\Delete.cshtml" />
     <Content Include="Views\StudentProfiles\Details.cshtml" />
-    <Content Include="Views\StudentProfiles\Edit.cshtml" />
     <Content Include="Views\StudentProfiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
