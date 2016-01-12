@@ -71,7 +71,7 @@
                                     grid.Column("UploadsID", "ID"),
                                     grid.Column("Title", "Title"),
                                     grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
-                                    grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID },null) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID }, null)</text>)
+                                    grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID }, new { @class="btn btn-success btn-sm btn3d"}) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID }, new { @class = "btn btn-danger btn-sm btn3d" })</text>)
                               ))
             </div>
         </div>
