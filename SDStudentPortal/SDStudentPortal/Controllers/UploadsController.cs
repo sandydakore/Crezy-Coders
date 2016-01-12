@@ -57,7 +57,7 @@ namespace SDStudentPortal.Controllers
         }
 
         // GET: Uploads/Create
-        public ActionResult Create(int? ProjectID)
+        public ActionResult Create(int? ProjectID, string returnUrl)
         {
             var uid = User.Identity.GetUserId();
                         
@@ -66,7 +66,7 @@ namespace SDStudentPortal.Controllers
             pList.Insert(0, db.project.Find(1));
 
             ViewBag.ProjectList = new SelectList(pList, "ProjectID", "Title", ProjectID ?? 1);
-
+            ViewBag.returnUrl = returnUrl;
             return View();            
         }
         
@@ -74,7 +74,7 @@ namespace SDStudentPortal.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UploadsID,Title,Description,UploadFileUrl,UploadFileUrlPrivacySetting,FileType,ProjectID")] Uploads uploads, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "UploadsID,Title,Description,UploadFileUrl,UploadFileUrlPrivacySetting,FileType,ProjectID")] Uploads uploads, HttpPostedFileBase file, string returnUrl)
         {
             if (ModelState.IsValid && file != null)
             {
@@ -88,6 +88,10 @@ namespace SDStudentPortal.Controllers
 
                 db.Uploads.Add(uploads);
                 db.SaveChanges();
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
                 return RedirectToAction("Index");
             }
 
@@ -96,7 +100,7 @@ namespace SDStudentPortal.Controllers
         }
 
         // GET: Uploads/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -112,6 +116,7 @@ namespace SDStudentPortal.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.returnUrl = returnUrl;
             //ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", uploads.UserId);
             return View(uploads);
         }
@@ -121,7 +126,7 @@ namespace SDStudentPortal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UploadsID,Title,Description,DateCreated,UploadFileUrl,UploadFileUrlPrivacySetting,FileType")] Uploads uploads, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "ProjectID,UploadsID,Title,Description,DateCreated,UploadFileUrl,UploadFileUrlPrivacySetting,FileType")] Uploads uploads, HttpPostedFileBase file, string returnUrl)
         {
             if (ModelState.IsValid && file != null)
             {
@@ -134,6 +139,10 @@ namespace SDStudentPortal.Controllers
                 uploads.UserId = uid;
                 db.Entry(uploads).State = EntityState.Modified;
                 db.SaveChanges();
+                if(returnUrl!=null)
+                {
+                    return Redirect(returnUrl);
+                }
                 return RedirectToAction("Index");
             }
             //ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", uploads.UserId);
@@ -141,7 +150,7 @@ namespace SDStudentPortal.Controllers
         }
 
         // GET: Uploads/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -152,17 +161,22 @@ namespace SDStudentPortal.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.returnUrl = returnUrl;
             return View(uploads);
         }
 
         // POST: Uploads/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string returnUrl)
         {
             Uploads uploads = db.Uploads.Find(id);
             db.Uploads.Remove(uploads);
             db.SaveChanges();
+            if (returnUrl != null)
+            {
+                return Redirect(returnUrl);
+            }
             return RedirectToAction("Index");
         }
 
@@ -173,6 +187,6 @@ namespace SDStudentPortal.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }        
     }
 }
