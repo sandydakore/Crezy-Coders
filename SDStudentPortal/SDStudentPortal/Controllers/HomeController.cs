@@ -15,6 +15,17 @@ namespace SDStudentPortal.Controllers
 
         public ActionResult Index()
         {
+            Project prj = db.project.Find(1);
+            if (prj == null)
+            {
+                Project initPrj = new Project();
+
+                initPrj.Title = "Please Select Project";
+
+                db.project.Add(initPrj);
+                db.SaveChanges();
+            }
+
             IEnumerable<Blog> blogs = db.blog.OrderByDescending(b => b.BlogCreatedDate).ToList();
             IEnumerable<BlogComment> comments = db.blogcomment.ToList();
 

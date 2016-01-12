@@ -19,17 +19,7 @@ namespace SDStudentPortal.Controllers
 
         // GET: Projects
         public ActionResult Index()
-        {
-            Project prj = db.project.Find(1);
-            if (prj == null)
-            {
-                Project initPrj = new Project();
-
-                initPrj.Title = "Please Select Project";
-
-                db.project.Add(initPrj);
-                db.SaveChanges();
-            }
+        {            
             var uid = User.Identity.GetUserId();
 
             var project = db.project.Where(p => p.UserId==uid);
