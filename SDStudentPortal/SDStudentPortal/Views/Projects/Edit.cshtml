@@ -56,7 +56,7 @@
         <div class="form-group">
             @Html.Label("Add File to Project", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ActionLink("Add File to Project", "Create", "Uploads", new { ProjectID = @Model.ProjectID }, null)
+                @Html.ActionLink("Add File to Project", "Create", "Uploads", new { ProjectID = @Model.ProjectID, returnUrl = HttpContext.Current.Request.RawUrl }, null)
             </div>
         </div>
 
@@ -71,7 +71,7 @@
                                     grid.Column("UploadsID", "ID"),
                                     grid.Column("Title", "Title"),
                                     grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
-                                    grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID }, new { @class="btn btn-success btn-sm btn3d"}) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID }, new { @class = "btn btn-danger btn-sm btn3d" })</text>)
+                                    grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID, returnUrl = HttpContext.Current.Request.RawUrl}, new { @class = "btn btn-success btn-sm btn3d" }) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID, returnUrl = HttpContext.Current.Request.RawUrl }, new { @class = "btn btn-danger btn-sm btn3d" })</text>)
                               ))
             </div>
         </div>
