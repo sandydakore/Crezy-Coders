@@ -15,12 +15,14 @@ namespace SDStudentPortal.Controllers
 
         public ActionResult Index()
         {
+            
             IEnumerable<Blog> blogs = db.blog.OrderByDescending(b => b.BlogCreatedDate).ToList();
             IEnumerable<BlogComment> comments = db.blogcomment.ToList();
 
             var tuple = new Tuple<IEnumerable<Blog>, IEnumerable<BlogComment>>(blogs, comments);
 
             return View(tuple);
+            
         }
 
         public ActionResult About()

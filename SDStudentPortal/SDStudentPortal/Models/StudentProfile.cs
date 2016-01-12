@@ -9,9 +9,9 @@ namespace SDStudentPortal.Models
     public class StudentProfile
     {
         public int StudentProfileID { get; set; }
-        [ForeignKey("User")]
-        public virtual string UserId { get; set; }
-        public virtual ApplicationUser User { get; set; }
+
+        public virtual UserModel User { get; set; }
+
         public virtual IEnumerable<Project> Projects { get; set; }
         public virtual IEnumerable<Blog> Blogs { get; set; }
     }
