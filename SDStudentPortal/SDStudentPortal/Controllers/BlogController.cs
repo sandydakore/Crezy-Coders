@@ -48,7 +48,7 @@ namespace SDStudentPortal.Controllers
         // POST: Blog/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BlogID,Content,Public")] Blog blog)
+        public ActionResult Create([Bind(Include = "BlogID,Content,BlogPrivacySetting")] Blog blog)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace SDStudentPortal.Controllers
         // POST: Blog/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BlogID,Content,BlogCreatedDate,Public")] Blog blog)
+        public ActionResult Edit([Bind(Include = "BlogID,Content,BlogCreatedDate,BlogPrivacySetting")] Blog blog)
         {
             if (ModelState.IsValid)
             {
