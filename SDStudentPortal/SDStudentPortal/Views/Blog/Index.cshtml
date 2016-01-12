@@ -22,7 +22,7 @@
             @Html.DisplayNameFor(model => model.BlogUpdatedDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Public)
+            @Html.DisplayNameFor(model => model.BlogPrivacySetting)
         </th>
         <th></th>
     </tr>
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.BlogUpdatedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Public)
+                @Html.DisplayFor(modelItem => item.BlogPrivacySetting)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
