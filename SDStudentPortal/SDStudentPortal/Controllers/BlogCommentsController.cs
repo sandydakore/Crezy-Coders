@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace SDStudentPortal.Controllers
 {
+     [Authorize]
     public class BlogCommentsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
