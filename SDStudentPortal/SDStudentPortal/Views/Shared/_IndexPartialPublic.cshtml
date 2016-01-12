@@ -3,7 +3,7 @@
 
 <dl class="dl-horizontal">
 
-    @foreach (var item in Model.Item1.Where(b => b.Public == true))
+    @foreach (var item in Model.Item1.Where(b => b.BlogPrivacySetting == 0))
     {
         <dt>
             @Html.DisplayNameFor(model => item.Content)
