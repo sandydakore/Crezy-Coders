@@ -128,6 +128,10 @@ namespace SDStudentPortal.Models
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                else if(user==null)
+                {
+                    return RedirectToAction("Create", "UserModels");
+                }
                 return View(user);
             }
             else
@@ -147,7 +151,7 @@ namespace SDStudentPortal.Models
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel, HttpPostedFileBase file)
-        {
+        {            
             if (ModelState.IsValid)
             {
 
