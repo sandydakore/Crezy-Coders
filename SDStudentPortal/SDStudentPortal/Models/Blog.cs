@@ -26,6 +26,6 @@ namespace SDStudentPortal.Models
         [DataType(DataType.DateTime)]
         public DateTime BlogUpdatedDate { get; set; }
 
-        public bool Public { get; set; }
+        public MyEnum BlogPrivacySetting { get; set; }
     }
 }

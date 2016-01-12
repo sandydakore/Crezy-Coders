@@ -428,7 +428,7 @@ a{
   .webGrid {
         margin: 4px;
         border-collapse: collapse;
-        width: 500px;
+        /*width: 500px;*/
         background-color: #B4CFC3;
     }
 

@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace SDStudentPortal.Models
 {
+     [Authorize]
     public class StudentProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

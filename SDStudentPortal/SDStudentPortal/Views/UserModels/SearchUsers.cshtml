@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SDStudentPortal.Models.UserModel>
-
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
 @{
     ViewBag.Title = "SeachUsers";
 }
@@ -15,10 +15,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col col-lg-12">
+        @*<div class="col col-lg-12">*@
+        <div class="col-sm-3">
             @foreach (var item in Model)
             {
-                <div style="display:inline-block; padding:4px 7px 2px 4px; text-align:center">
+                @*<div style="display:inline-block; padding:4px 7px 2px 4px; text-align:center">
                     <div class="image">
                         <a a href='@Url.Action("StudentProfile", "UserModels")'>
                             <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:250px; width:160px" />
@@ -30,6 +31,20 @@
                     </div>
                     <div>
                         @item.ProfileName
+                    </div>
+                </div>*@
+                <div class="card">
+                    <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                    <div class="avatar">
+                        <a a href='@Url.Action("StudentProfile", "UserModels")'>
+                            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" />
+                        </a>
+                    </div>
+                    <div class="content">
+                        <p>
+                            @item.FirstName @item.LastName <br>
+                            @item.ProfileName
+                        </p>
                     </div>
                 </div>
             }
