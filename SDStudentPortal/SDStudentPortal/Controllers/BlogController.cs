@@ -12,18 +12,19 @@ using Microsoft.AspNet.Identity.Owin;
 
 
 namespace SDStudentPortal.Controllers
-{
-    [Authorize]
+{    
     public class BlogController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize]
         public ActionResult Index()
         {
             var uid = User.Identity.GetUserId();
             return View(db.blog.Where(b => b.UserId == uid));
         }
 
+        [Authorize]
         // GET: Blog/Details/5
         public ActionResult Details(int? id)
         {
@@ -39,12 +40,14 @@ namespace SDStudentPortal.Controllers
             return View(blog);
         }
 
+        [Authorize]
         // GET: Blog/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         // POST: Blog/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,6 +69,7 @@ namespace SDStudentPortal.Controllers
             return View(blog);
         }
 
+        [Authorize]
         // GET: Blog/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -82,6 +86,7 @@ namespace SDStudentPortal.Controllers
         }
 
         // POST: Blog/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BlogID,Content,BlogCreatedDate,BlogPrivacySetting")] Blog blog)
@@ -101,6 +106,7 @@ namespace SDStudentPortal.Controllers
         }
 
         // GET: Blog/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +122,7 @@ namespace SDStudentPortal.Controllers
         }
 
         // POST: Blog/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
