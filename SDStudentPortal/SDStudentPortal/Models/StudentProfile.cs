@@ -12,6 +12,7 @@ namespace SDStudentPortal.Models
 
         public virtual UserModel User { get; set; }
 
+       
         public virtual IEnumerable<Project> Projects { get; set; }
         public virtual IEnumerable<Blog> Blogs { get; set; }
     }
