@@ -48,8 +48,8 @@
                             Blogs <span class="caret"></span>
                         </div>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="~/Views/Blog/Index.cshtml">Blogs</a></li>
-                            <li><a href="~/Views/Blog/BlogSearchResult.cshtml">Search Blogs</a></li>
+                            <li>@Html.ActionLink("Blogs","Index", "Blog")</li>
+                            <li>@Html.ActionLink("Search Blogs", "BlogSearchResult", "Blog")</li>
                         </ul>
                     </div>
                 <ul  class="nav navbar-nav">
