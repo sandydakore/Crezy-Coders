@@ -114,11 +114,6 @@ namespace SDStudentPortal.Models
         // GET: UserModels/Edit/5
         public ActionResult Edit(int? id)
         {
-            //UserModel userModel = db.UserModels.Find(id);
-            //if (userModel == null)
-            //{
-            //    return HttpNotFound();
-            //}
             if (id == null)
             {
                 var uid = User.Identity.GetUserId();
@@ -128,11 +123,23 @@ namespace SDStudentPortal.Models
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                else if(user==null)
+                {
+                    return RedirectToAction("Create", "UserModels");
+                }
                 return View(user);
             }
             else
             {
                 UserModel user = db.UserModels.Find(id);
+
+                string fullPath = Request.MapPath("~/" + user.ProfilePictureURL);
+
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                } 
+
                 if (user == null)
                 {
                     return HttpNotFound();
@@ -147,7 +154,7 @@ namespace SDStudentPortal.Models
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel, HttpPostedFileBase file)
-        {
+        {            
             if (ModelState.IsValid)
             {
 
@@ -159,10 +166,7 @@ namespace SDStudentPortal.Models
 
                     userModel.ProfilePictureURL = "Images/" + filename;                    
                 }
-                //else
-                //{
-                //    user
-                //}
+                
                 userModel.UserId = User.Identity.GetUserId();
                 db.Entry(userModel).State = EntityState.Modified;
                 db.SaveChanges();
@@ -194,6 +198,13 @@ namespace SDStudentPortal.Models
             UserModel userModel = db.UserModels.Find(id);
             db.UserModels.Remove(userModel);
             db.SaveChanges();
+
+            string fullPath = Request.MapPath("~/" + userModel.ProfilePictureURL);
+
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            } 
             return RedirectToAction("Index");
         }
 

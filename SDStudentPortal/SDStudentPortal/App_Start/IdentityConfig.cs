@@ -134,6 +134,14 @@ namespace SDStudentPortal
             if (adminresult.Succeeded)
             {
                 userManager.AddToRole(user.Id, roleName);
+
+                //Add Initial Project
+                Project p = new Project();
+
+                p.UserId = user.Id;
+                p.Title = "Please Select Project";
+                p.Description = "Initial Project";
+                context.project.Add(p);
             }
 
             email = "member@member.net";
