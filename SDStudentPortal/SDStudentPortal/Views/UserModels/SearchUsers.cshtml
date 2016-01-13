@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SDStudentPortal.Models.UserModel>
-
+<link href="~/Content/StyleSheet2.css" rel="stylesheet" />
 @{
     ViewBag.Title = "SeachUsers";
 }
@@ -15,20 +15,25 @@
 
 <div class="container">
     <div class="row">
-        <div class="col col-lg-12">
+        @*<div class="col col-lg-12">*@
+        <div class="col-sm-3">
             @foreach (var item in Model)
             {
-                <div style="display:inline-block; padding:4px 7px 2px 4px; text-align:center">
-                    <div class="image">
-                        <a a href='@Url.Action("StudentProfile", "UserModels")'>
-                            <img src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" style="height:250px; width:160px" />
+                <div class="card hovercard">
+                    <div class="cardheader">
+                        @*<img alt="" class="blur" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)"/>*@
+                    </div>
+                    <div class="avatar">
+                        <a a href='@Url.Action("Details", "StudentProfiles")'>
+                            <img alt="" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" />
                         </a>
                     </div>
-                    <div class="name">
-                        @item.FirstName
-                        @item.LastName
+                    <div class="info">
+                        <div class="title">
+                            <a target="_blank" href='@Url.Action("Details", "StudentProfiles")'>@item.FirstName @item.LastName</a>
+                        </div>
                     </div>
-                    <div>
+                    <div class="bottom">
                         @item.ProfileName
                     </div>
                 </div>

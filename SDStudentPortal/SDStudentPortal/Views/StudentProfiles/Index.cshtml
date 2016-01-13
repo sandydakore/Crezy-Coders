@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SDStudentPortal.Models.StudentProfile>
+﻿@model IEnumerable<SDStudentPortal.Models.UserModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.User.Email)
+            @Html.DisplayNameFor(model => model.UserId)
         </th>
         <th></th>
     </tr>
@@ -20,12 +20,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
+            @Html.DisplayFor(modelItem => item.UserId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StudentProfileID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StudentProfileID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StudentProfileID })
+            @Html.ActionLink("Details", "Details", new { id=item.UserId }) 
         </td>
     </tr>
 }

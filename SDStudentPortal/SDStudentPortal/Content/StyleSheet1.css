@@ -79,3 +79,45 @@
 .btn-pref .btn {
     -webkit-border-radius:0 !important;
 }
+
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+.verticalAlign{
+    vertical-align: top;
+    position: relative;
+    text-align: center;
+    margin: 7.5px 7.5px 7.5px 15px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    line-height: 20px;
+}
+
+.navbar-brand{
+    background: url('\Images\robertsoncollege-logo.png') no-repeat;
+    background-size: 40px 40px;
+    height:40px;
+    margin:5px;
+    width:40px;
+}
+
+.headerTitle {
+    clear: both;
+    float: left;
+    padding-left: 260px;
+    margin-top: 0px;
+    padding-top:0px;
+    line-height: 2;
+    width:865px;
+    font-size:x-large;
+    color:indianred;
+}
+
+.pushContent{
+    margin-top:80px;
+}
+
+.src-image {
+  display: none;
+}

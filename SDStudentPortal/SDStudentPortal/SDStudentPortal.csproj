@@ -240,6 +240,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom.css" />
     <Content Include="Content\CustomBootstrap.css" />
+    <Content Include="Content\StyleSheet2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -478,10 +479,7 @@
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\UserModels\SearchUsers.cshtml" />
     <Content Include="Views\UserModels\StudentProfile.cshtml" />
-    <Content Include="Views\StudentProfiles\Create.cshtml" />
-    <Content Include="Views\StudentProfiles\Delete.cshtml" />
     <Content Include="Views\StudentProfiles\Details.cshtml" />
-    <Content Include="Views\StudentProfiles\Edit.cshtml" />
     <Content Include="Views\StudentProfiles\Index.cshtml" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />

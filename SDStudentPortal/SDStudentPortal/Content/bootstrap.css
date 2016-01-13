@@ -760,7 +760,7 @@ pre code {
 }
 
 .container {
-  padding-right: 15px;
+  padding-right: 0px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
@@ -4175,6 +4175,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   right: 0;
   left: 0;
   border-width: 0 0 1px;
+  padding-bottom:0px;
+  border-bottom: 20px hidden;
 }
 
 @media (min-width: 768px) {
@@ -5242,7 +5244,7 @@ a.thumbnail:focus {
 }
 
 .media > .pull-right {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .media-list {
@@ -6216,7 +6218,7 @@ body.modal-open,
 }
 
 .pull-right {
-  float: right !important;
+  float: right;
 }
 
 .pull-left {

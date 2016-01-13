@@ -8,18 +8,6 @@
     
 }
 
-<style type="text/css">
-    a.imglnk
-			{
-			    background: url('" + @Url.Content("~/Images/edit-icon.png") + "') no-repeat top left;
-				 display: block;
-				 width: 45px;
-				 height: 25px;
-				 text-indent: -9999px; /* hides the link text */
-			}
-
-</style>
-
 <link href="~/Content/Custom.css" rel="stylesheet" />
 
 <h2>Edit</h2>
@@ -61,18 +49,19 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Files")
+            @Html.Label("Files", htmlAttributes: new { @class = "control-label col-md-2" })
             <div id="col-md-10">
                 @grid.GetHtml(tableStyle: "webGrid",
                                 headerStyle: "header",
                                 alternatingRowStyle: "alt",
                                 selectedRowStyle: "select",
                                 columns: grid.Columns(
-                                    grid.Column("UploadsID", "ID"),
+                                    grid.Column("File#", format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
                                     grid.Column("Title", "Title"),
+                                    grid.Column("Description","Description"),
                                     grid.Column("UploadFileUrl","File",format: @<text><img src="@item.UploadFileUrl" /></text>),
-                                    grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID, returnUrl = HttpContext.Current.Request.RawUrl}, new { @class = "btn btn-success btn-sm btn3d" }) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID, returnUrl = HttpContext.Current.Request.RawUrl }, new { @class = "btn btn-danger btn-sm btn3d" })</text>)
-                              ))
+                                    grid.Column("", "Actions", format:@<text> @Html.ActionLink("Edit", "Edit", "Uploads", new { id = item.UploadsID, returnUrl = HttpContext.Current.Request.RawUrl }, new { @class = "btn btn-success btn-sm btn3d" }) @Html.ActionLink("Delete", "Delete", "Uploads", new { id = item.UploadsID, returnUrl = HttpContext.Current.Request.RawUrl }, new { @class = "btn btn-danger btn-sm btn3d" })</text>)
+                              ))               
             </div>
         </div>
 
