@@ -108,6 +108,13 @@ namespace SDStudentPortal.Controllers
             }
             Uploads uploads = db.Uploads.Find(id);
 
+            string fullPath = Request.MapPath("~/" + uploads.UploadFileUrl);
+
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }  
+
             var uid = User.Identity.GetUserId();
 
             ViewBag.ProjectList = new SelectList(db.project.Where(p => p.UserId == uid), "ProjectID", "Title", uploads.ProjectID);
@@ -173,6 +180,14 @@ namespace SDStudentPortal.Controllers
             Uploads uploads = db.Uploads.Find(id);
             db.Uploads.Remove(uploads);
             db.SaveChanges();
+
+            string fullPath = Request.MapPath("~/" + uploads.UploadFileUrl);
+            
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }                
+
             if (returnUrl != null)
             {
                 return Redirect(returnUrl);
