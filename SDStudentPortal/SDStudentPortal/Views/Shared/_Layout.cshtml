@@ -37,7 +37,7 @@
                     @Html.ActionLink("Software Development Student Portal", "Index", "Home", new { @class = "headerTitle" })
                 @*</a>*@
             </div><br/>
-            <div class="nav navbar-nav navbar-right">
+            <div class="nav navbar-nav navbar-right" style="padding-right:10px">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Search Users", "SearchUsers", "UserModels")</li>
                     <li>@Html.ActionLink("User Info", "Edit", "UserModels")</li>
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div><br/><br/>
-    <div class="container body-content pushContent">
+    <div class="container body-content pushContent" style="padding-left:100px; padding-right:100px">
         @RenderBody()
         <hr />
         <footer>
