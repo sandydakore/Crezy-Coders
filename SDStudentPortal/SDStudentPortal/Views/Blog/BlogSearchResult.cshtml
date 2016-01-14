@@ -7,10 +7,21 @@
 <h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("BlogSearchResult", "Blog", FormMethod.Get))
-{   
-    @Html.Label("Blog Filter : ");
-    @Html.TextBox("txtSearch");
-    <input type="submit" value="Search" />
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Blog Filter", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("txtSearch", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 
 <br />
