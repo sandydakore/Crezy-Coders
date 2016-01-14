@@ -11,12 +11,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace SDStudentPortal.Controllers
-{
-    [Authorize]
+{    
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize]
         // GET: Projects
         public ActionResult Index()
         {            
@@ -26,6 +26,7 @@ namespace SDStudentPortal.Controllers
             return View(project.ToList());
         }
 
+        
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {
@@ -46,6 +47,7 @@ namespace SDStudentPortal.Controllers
             return View(project);
         }
 
+        [Authorize]
         // GET: Projects/Create
         public ActionResult Create()
         {
@@ -56,6 +58,7 @@ namespace SDStudentPortal.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProjectID,Title,Description")] Project project)
         {
@@ -73,6 +76,7 @@ namespace SDStudentPortal.Controllers
             return View(project);
         }
 
+        [Authorize]
         // GET: Projects/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -96,6 +100,7 @@ namespace SDStudentPortal.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProjectID,Title,Description")] Project project)
         {
@@ -111,6 +116,7 @@ namespace SDStudentPortal.Controllers
             return View(project);
         }
 
+        [Authorize]
         // GET: Projects/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -128,6 +134,7 @@ namespace SDStudentPortal.Controllers
 
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -135,6 +142,13 @@ namespace SDStudentPortal.Controllers
             db.project.Remove(project);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+                
+        public ActionResult SearchProject(string txtsearchQuery)
+        {
+            IEnumerable<Project> projects = db.project.Where(p => p.Description.ToLower().Contains(txtsearchQuery.ToLower()) || p.Title.ToLower().Contains(txtsearchQuery.ToLower()));
+
+            return View(projects);
         }
 
         protected override void Dispose(bool disposing)
