@@ -21,7 +21,7 @@
             {
                 <div class="card hovercard">
                     <div class="cardheader">
-                        @*<img alt="" class="blur" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)"/>*@
+                        <img alt="" class="card-bkimg" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)"/>
                     </div>
                     <div class="avatar">
                         <a a href='@Url.Action("Details", "StudentProfiles")'>
@@ -35,7 +35,7 @@
                             @*<a target="_blank" href='@Url.Action("Details", "StudentProfiles")'>@item.FirstName @item.LastName</a>*@
                         </div>
                     </div>
-                    <div class="bottom">
+                    <div class="bottom" style="font-size:18px">
                         @item.ProfileName
                     </div>
                 </div>

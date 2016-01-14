@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace SDStudentPortal.Models
 {
@@ -15,8 +16,8 @@ namespace SDStudentPortal.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        [Required]
-        [DataType(DataType.MultilineText)]
+        [Required,AllowHtml]
+        [UIHint("tinymce_full_compressed")]
         public string Content { get; set; }
 
         [Required]
