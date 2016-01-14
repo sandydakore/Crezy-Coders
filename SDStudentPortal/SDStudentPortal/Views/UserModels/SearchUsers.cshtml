@@ -30,7 +30,9 @@
                     </div>
                     <div class="info">
                         <div class="title">
-                            <a target="_blank" style="font-size:24px" href='@Url.Action("Details", "StudentProfiles")'>@item.FirstName @item.LastName</a>
+                            @Html.ActionLink("Detail", "Details", "StudentProfiles", new { id = item.UserId },null)
+                            
+                            @*<a target="_blank" href='@Url.Action("Details", "StudentProfiles")'>@item.FirstName @item.LastName</a>*@
                         </div>
                     </div>
                     <div class="bottom" style="font-size:18px">

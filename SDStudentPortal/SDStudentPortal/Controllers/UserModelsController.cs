@@ -72,6 +72,8 @@ namespace SDStudentPortal.Models
                 searchUsers = searchUsers.Where(u => u.LastName.Contains(searchString) || u.ProfileName.Contains(searchString) || u.FirstName.Contains(searchString));
             }
             //need to add "Public" or "UserOnly" criteria
+            var uid = User.Identity.GetUserId();
+            ViewBag.uid = uid;
             return View(searchUsers.ToList());
         }
 

@@ -1,7 +1,7 @@
 ﻿@model SDStudentPortal.Models.StudentProfile
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "StudentProfile";
 }
 
 <h2>Details</h2>
@@ -9,17 +9,192 @@
 <div>
     <h4>StudentProfile</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.User.UserId)
-        </dt>
+    <div class="container" id="Profile">
+        <div class="row" id="NameAndBio">
+            <div class="col-lg-3">
+                <dd>
+                    @Html.DisplayFor(model => model.User.ProfileName)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.User.UserId)
-        </dd>
+                <dd>
+                    <img src="../../@Html.DisplayFor(model => model.User.ProfilePictureURL)" style="height:150px; width:150px" />
+                </dd>
+            </div>
+            <div class="col-lg-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.FirstName)
+                </dt>
 
-    </dl>
-</div>
+                <dd>
+                    @Html.DisplayFor(model => model.User.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.LastName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.ClassNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.ClassNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.ProfileName)
+                </dt>
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.Gender)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.Gender)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.Address)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.PhoneNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.PhoneNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.DateOfBirth)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.DateOfBirth)
+                </dd>
+
+
+            </div>
+            <div class="col-lg-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.Skills)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.Skills)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.Certificates)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.Certificates)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.Memberships)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.Memberships)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.Experience)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.Experience)
+                </dd>
+            </div>
+        </div>
+        <div class="row" id="Projects">
+            <h2>Projects</h2>
+            <hr />
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+
+                    <th>
+                        @Html.Label("Project Title")
+                    </th>
+                    <th>
+                        @Html.Label("Project Description")
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Projects)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ProjectID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <div class="row" id="Blogs">
+
+            <h2>Blogs</h2>
+            <hr />
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+
+                    <th>
+                        @Html.Label("Blog Title")
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Blogs)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.BlogID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.BlogID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+
+        <div>
+
+        </div>
+        <footer></footer>
+    </div>
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
