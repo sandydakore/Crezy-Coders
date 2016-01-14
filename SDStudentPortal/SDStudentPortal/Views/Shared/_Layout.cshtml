@@ -39,8 +39,8 @@
             </div><br/>
             <div class="nav navbar-nav navbar-right" style="padding-right:10px">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Search Users", "SearchUsers", "UserModels")</li>
-                    <li>@Html.ActionLink("User Info", "Edit", "UserModels")</li>
+                    <li>@Html.ActionLink("Search Users", "SearchUsers", "UserModels")</li>     
+                    <li>@Html.ActionLink("Profile", "Details", "StudentProfiles")</li>              
                     <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
                 </ul>
                     <div class="btn-group show-on-hover">
@@ -64,7 +64,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Andrew, Angele, Jason, Sandeep</p>
         </footer>
     </div>
 
