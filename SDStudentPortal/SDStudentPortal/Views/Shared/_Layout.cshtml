@@ -34,27 +34,33 @@
                     <span class="icon-bar"></span>
                 </button>
                 @*<a class="navbar-brand">*@
-                    @Html.ActionLink("Software Development Student Portal", "Index", "Home", new { @class = "headerTitle" })
+                @Html.ActionLink("Software Development Student Portal", "Index", "Home", new { @class = "headerTitle" })
                 @*</a>*@
             </div><br />
             <div class="nav navbar-nav navbar-right" style="padding-right:10px">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Search Users", "SearchUsers", "UserModels")</li>
+                    <li>@Html.ActionLink("Profile", "Details", "StudentProfiles")</li>
                     <li>@Html.ActionLink("User Info", "Edit", "UserModels")</li>
-                    <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
-                        <li>@Html.ActionLink("Search Prjects", "SearchProject", "Projects")</li>
                 </ul>
-                </div>
-
-                    <div class="btn-group show-on-hover">
-                        <div role="button" class="navbar-link dropdown-toggle verticalAlign" data-toggle="dropdown">
-                            Blogs <span class="caret"></span>
-                        </div>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Blogs", "Index", "Blog")</li>
-                            <li>@Html.ActionLink("Search Blogs", "BlogSearchResult", "Blog")</li>
-                        </ul>
+                <div class="btn-group show-on-hover">
+                    <div role="button" class="navbar-link dropdown-toggle verticalAlign" data-toggle="dropdown">
+                        Projects <span class="caret"></span>
                     </div>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
+                        <li>@Html.ActionLink("Search Projects", "SearchProject", "Projects")</li>
+                    </ul>
+                </div>
+                <div class="btn-group show-on-hover">
+                    <div role="button" class="navbar-link dropdown-toggle verticalAlign" data-toggle="dropdown">
+                        Blogs <span class="caret"></span>
+                    </div>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Blogs", "Index", "Blog")</li>
+                        <li>@Html.ActionLink("Search Blogs", "BlogSearchResult", "Blog")</li>
+                    </ul>
+                </div>
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About Us", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
@@ -62,7 +68,9 @@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div><br /><br />
+    </div>
+
+    <br /><br />
     <div class="container body-content pushContent" style="padding-left:100px; padding-right:100px">
         @RenderBody()
         <hr />
