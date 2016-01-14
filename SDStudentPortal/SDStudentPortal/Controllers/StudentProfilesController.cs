@@ -26,26 +26,43 @@ namespace SDStudentPortal.Models
         }
 
         // GET: StudentProfiles/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var uid = id != null ? id.ToString() : "-1";
-            StudentProfile studentProfile = new StudentProfile();
-            studentProfile.User = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
-
-            if (studentProfile.User == null)
+            else
             {
-                return HttpNotFound();
+                StudentProfile studentProfile = new StudentProfile();
+                studentProfile.User = db.UserModels.Where(u => u.UserId == id).SingleOrDefault();
+                studentProfile.Blogs = db.blog.Where(b => b.UserId == id);
+                studentProfile.Projects = db.project.Where(p => p.UserId == id);
+                if (studentProfile.User == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(studentProfile);
             }
 
-            studentProfile.Blogs = db.blog.Where(b => b.UserId == uid);
-            studentProfile.Projects = db.project.Where(p => p.UserId == uid);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
 
-            return View(studentProfile);
+            //var uid = id != null ? id.ToString() : "-1";
+            //StudentProfile studentProfile = new StudentProfile();
+            //studentProfile.User = db.UserModels.Where(u => u.UserId == uid).SingleOrDefault();
+
+            //if (studentProfile.User == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            //studentProfile.Blogs = db.blog.Where(b => b.UserId == uid);
+            //studentProfile.Projects = db.project.Where(p => p.UserId == uid);
+
+            //return View(studentProfile);
         }
         
 
