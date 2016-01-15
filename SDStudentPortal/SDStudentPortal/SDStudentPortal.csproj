@@ -567,7 +567,6 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\BlogComments\LoadAllComments.cshtml" />
     <Content Include="Views\Shared\_PartialProfilePage.cshtml" />
-    <Content Include="Views\Blog\BlogSearchResult.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Delete.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
@@ -581,6 +580,7 @@
     <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
     <Content Include="Views\Projects\SearchProject.cshtml" />
     <Content Include="Views\Projects\_PartialSearchProject.cshtml" />
+    <Content Include="Views\Blog\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,20 +2,27 @@
 
 <link href="~/Content/Custom.css" rel="stylesheet" />
 
-<table class="webgrid-table">
+<table class="webgrid-table" style="width:100%;">
     @foreach (var item in Model.Item1)
     {
+        <tr>
+            <td style="width:90%;">
+                <hr />
+                <br />
+            </td>
+        </tr>
         <tr>
             <td colspan="2"><label id="BlogID" class="display-mode" hidden="hidden">@item.BlogID</label> </td>
         </tr>
         <tr>
             <td colspan="2">
-                <span class="glyphicon glyphicon-user" style="color:skyblue"> @item.User.UserName  </span>
+                <a style="font-size:24px" href='@Url.Action("Details", "StudentProfiles", new { id = item.UserId }, null)'>@item.User.UserName</a>
+                 
                 <p><i class="glyphicon glyphicon-calendar"></i> on @item.BlogCreatedDate</p>
             </td>
         </tr>
         <tr>
-            <td colspan="2"><b>@Html.DisplayFor(modelItem => item.Content)</b> </td>
+            <td colspan="2">@Html.Raw(item.Content)</td>
         </tr>
         <tr>
             <td width="350px">
@@ -53,6 +60,7 @@
         </tr>
     }
 </table>
+<br />
 
 <script type="text/javascript">
     $(document).ready(function () {

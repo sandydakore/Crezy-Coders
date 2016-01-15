@@ -176,7 +176,7 @@
                     <tr>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.Content)
+                            @Html.Raw(item.Content)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |

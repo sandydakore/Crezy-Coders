@@ -1,54 +1,14 @@
-﻿@model IEnumerable<SDStudentPortal.Models.Blog>
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Student Blogs";
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm("Index", "Blog", FormMethod.Get))
+{
+    <div class="form-horizontal" style="text-align:left;padding-top:15px;">
+        @Html.Label("Search Blogs")
+        @Html.TextBox("txtSearch")  <input type="submit" value="Search" class="btn btn-default" />
+    </div>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlogCreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlogUpdatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlogPrivacySetting)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.Raw(item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlogCreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlogUpdatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlogPrivacySetting)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.BlogID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.BlogID })
-            </td>
-        </tr>
-    }
-
-</table>
-
+<br />
+@Html.Partial("_IndexPartialPrivate")

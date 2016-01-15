@@ -18,7 +18,7 @@ namespace SDStudentPortal.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult AdminIndex()
         {
             var uid = User.Identity.GetUserId();
             return View(db.blog.Where(b => b.UserId == uid));
@@ -138,9 +138,19 @@ namespace SDStudentPortal.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult BlogSearchResult(string txtSearch)
+        public ActionResult Index(string txtSearch)
         {
-            IEnumerable<Blog> blogs = db.blog.Where(b => b.Content.ToLower().Contains(txtSearch.ToLower())).ToList();
+            IEnumerable<Blog> blogs;
+
+            if (!string.IsNullOrEmpty(txtSearch))
+            {
+                blogs = db.blog.Where(b => b.Content.ToLower().Contains(txtSearch.ToLower())).ToList();
+            }
+            else
+            {
+                blogs = db.blog.ToList();
+            }
+           
             IEnumerable<BlogComment> comments = db.blogcomment.ToList();
 
             var tuple = new Tuple<IEnumerable<Blog>, IEnumerable<BlogComment>>(blogs, comments);
