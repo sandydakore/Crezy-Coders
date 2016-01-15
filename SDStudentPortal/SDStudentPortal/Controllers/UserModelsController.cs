@@ -11,12 +11,13 @@ using System.Web.Mvc;
 
 namespace SDStudentPortal.Models
 {
-    [Authorize]
+   
     public class UserModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: UserModels
+        [Authorize]
         public ActionResult AdminIndex()
         {
             return View(db.UserModels.ToList());
@@ -78,6 +79,7 @@ namespace SDStudentPortal.Models
         }
 
         // GET: UserModels/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -88,6 +90,7 @@ namespace SDStudentPortal.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel, HttpPostedFileBase file)
         {
             if (ModelState.IsValid && file != null)
@@ -114,6 +117,7 @@ namespace SDStudentPortal.Models
         }
 
         // GET: UserModels/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -155,6 +159,7 @@ namespace SDStudentPortal.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "UserModelID,FirstName,LastName,UserEmailPrivacySetting,ProfilePictureURL,ProfilePictureURLPrivacySetting,ClassNumber,ProfileName,Gender,Address,AddressPrivacySetting,PhoneNumber,PhoneNumberPrivacySetting,DateOfBirth,DateOfBirthPrivacySetting,Skills,SkillsPrivacySetting,Certificates,CertificatesPrivacySetting,Memberships,MembershipsPrivacySetting,Experience,ExperiencePrivacySetting")] UserModel userModel, HttpPostedFileBase file)
         {            
             if (ModelState.IsValid)
@@ -176,7 +181,7 @@ namespace SDStudentPortal.Models
             }
             return View(userModel);
         }
-
+        [Authorize]
         // GET: UserModels/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -195,6 +200,7 @@ namespace SDStudentPortal.Models
         // POST: UserModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             UserModel userModel = db.UserModels.Find(id);
