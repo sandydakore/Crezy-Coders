@@ -19,11 +19,12 @@ namespace SDStudentPortal.Controllers
         [Authorize]
         // GET: Projects
         public ActionResult Index()
-        {            
-            var uid = User.Identity.GetUserId();
+        {
+            IEnumerable<Project> projects;
 
-            var project = db.project.Where(p => p.UserId==uid);
-            return View(project.ToList());
+            projects = db.project;
+
+            return View(projects);
         }
 
         
@@ -146,9 +147,21 @@ namespace SDStudentPortal.Controllers
                 
         public ActionResult SearchProject(string txtsearchQuery)
         {
-            IEnumerable<Project> projects = db.project.Where(p => p.Description.ToLower().Contains(txtsearchQuery.ToLower()) || p.Title.ToLower().Contains(txtsearchQuery.ToLower()));
+            if (txtsearchQuery != null)
+            {
 
-            return View(projects);
+                IEnumerable<Project> projects = db.project.Where(p => p.Description.ToLower().Contains(txtsearchQuery.ToLower()) || p.Title.ToLower().Contains(txtsearchQuery.ToLower()));
+
+                return View(projects);
+            }
+            else
+            {
+                IEnumerable<Project> projects;
+
+                projects = db.project;
+
+                return View(projects);
+            }
         }
 
         protected override void Dispose(bool disposing)
