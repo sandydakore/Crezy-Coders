@@ -172,7 +172,7 @@ namespace SDStudentPortal.Models
                 userModel.UserId = User.Identity.GetUserId();
                 db.Entry(userModel).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Uploads");
+                return RedirectToAction("Details", "StudentProfiles");
             }
             return View(userModel);
         }

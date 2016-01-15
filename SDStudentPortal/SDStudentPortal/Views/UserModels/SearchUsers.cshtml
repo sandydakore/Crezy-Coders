@@ -15,29 +15,33 @@
 
 <div class="container">
     <div class="row">
-        @*<div class="col col-lg-12">*@
-        <div class="col-sm-3">
+        <div class="col col-lg-12">
+            @*<div class="col-sm-3">*@
+
             @foreach (var item in Model)
             {
-                <div class="card hovercard">
-                    <div class="cardheader">
-                        <img alt="" class="card-bkimg" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)"/>
-                    </div>
-                    <div class="avatar">
-                        <a a href='@Url.Action("Details", "StudentProfiles")'>
-                            <img alt="" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" />
-                        </a>
-                    </div>
-                    <div class="info">
-                        <div class="title">                            
-                            <a style="font-size:24px" href='@Url.Action("Details", "StudentProfiles", new { id = item.UserId },null)'>@item.FirstName @item.LastName</a>
+                <div style="display:inline-block; padding:4px 7px 2px 4px; text-align:center; height:250px; width:225px">
+                    <div class="card hovercard">
+                        <div class="cardheader">
+                            <img alt="" class="card-bkimg" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" />
                         </div>
-                    </div>
-                    <div class="bottom" style="font-size:18px">
-                        @item.ProfileName
+                        <div class="avatar">
+                            <a a href='@Url.Action("Details", "StudentProfiles")'>
+                                <img alt="" src="../../@Html.DisplayFor(modelItem => item.ProfilePictureURL)" />
+                            </a>
+                        </div>
+                        <div class="info">
+                            <div class="title">
+                                <a style="font-size:24px" href='@Url.Action("Details", "StudentProfiles", new { id = item.UserId },null)'>@item.FirstName @item.LastName</a>
+                            </div>
+                        </div>
+                        <div class="bottom" style="font-size:18px">
+                            @item.ProfileName
+                        </div>
                     </div>
                 </div>
             }
+
         </div>
     </div>
 </div>
