@@ -242,6 +242,9 @@
     <Content Include="Content\CustomBootstrap.css" />
     <Content Include="Content\StyleSheet2.css" />
     <Content Include="favicon.ico" />
+    <Content Include="FileURL\300.jpg" />
+    <Content Include="FileURL\MovieScreenShot.jpg" />
+    <Content Include="FileURL\ScreenShot.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -585,7 +588,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="FileURL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

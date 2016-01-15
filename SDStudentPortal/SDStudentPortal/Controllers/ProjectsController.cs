@@ -16,7 +16,6 @@ namespace SDStudentPortal.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        [Authorize]
         // GET: Projects
         public ActionResult Index()
         {
