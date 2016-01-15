@@ -1,0 +1,28 @@
+﻿@model IEnumerable<SDStudentPortal.Models.Project>
+
+@{
+    ViewBag.Title = "SearchProject";
+}
+
+<h2>Search Project</h2>
+
+
+@using (Html.BeginForm("SearchProject", "Projects", FormMethod.Get))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Project Filter", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("txtsearchQuery", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<br />
+@Html.Partial("_PartialSearchProject")
