@@ -27,7 +27,7 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.User.FirstName)
-                </dd>
+                </dd>                
 
                 <dt>
                     @Html.DisplayNameFor(model => model.User.LastName)
@@ -35,7 +35,7 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.User.LastName)
-                </dd>
+                </dd>               
                 <dt>
                     @Html.DisplayNameFor(model => model.User.ClassNumber)
                 </dt>
@@ -47,7 +47,9 @@
                 <dt>
                     @Html.DisplayNameFor(model => model.User.ProfileName)
                 </dt>
-
+                <dd>
+                    @Html.DisplayFor(model => model.User.ProfileName)
+                </dd>
 
                 <dt>
                     @Html.DisplayNameFor(model => model.User.Gender)
@@ -195,6 +197,4 @@
         </div>
         <footer></footer>
     </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
