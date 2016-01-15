@@ -12,12 +12,12 @@
     <div class="container" id="Profile">
         <div class="row" id="NameAndBio">
             <div class="col-lg-3">
-                <dd>
+                <dd style="font-size:xx-large">
                     @Html.DisplayFor(model => model.User.ProfileName)
                 </dd>
 
                 <dd>
-                    <img src="../../@Html.DisplayFor(model => model.User.ProfilePictureURL)" style="height:150px; width:150px" />
+                    <img src="../../@Html.DisplayFor(model => model.User.ProfilePictureURL)" style="height:270px; width:270px" />
                 </dd>
             </div>
             <div class="col-lg-3">
@@ -27,7 +27,7 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.User.FirstName)
-                </dd>                
+                </dd>
 
                 <dt>
                     @Html.DisplayNameFor(model => model.User.LastName)
@@ -35,7 +35,7 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.User.LastName)
-                </dd>               
+                </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.User.ClassNumber)
                 </dt>
@@ -44,13 +44,17 @@
                     @Html.DisplayFor(model => model.User.ClassNumber)
                 </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.User.ProfileName)
-                </dt>
+
                 <dd>
                     @Html.DisplayFor(model => model.User.ProfileName)
                 </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.User.Email)
+                </dt>
 
+                <dd>
+                    @Html.DisplayFor(model => model.User.User.Email)
+                </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.User.Gender)
                 </dt>
@@ -123,7 +127,7 @@
             <h2>Projects</h2>
             <hr />
             <p>
-                @Html.ActionLink("Create New", "Create")
+                @Html.ActionLink("Create New", "Create", "Projects", null, null)
             </p>
             <table class="table">
                 <tr>
@@ -148,9 +152,9 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProjectID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID })
+                            @Html.ActionLink("Edit", "Edit", "Projects", new { id = item.ProjectID }, null) |
+                            @Html.ActionLink("Details", "Details", "Projects", new { id = item.ProjectID }, null) |
+                            @Html.ActionLink("Delete", "Delete", "Projects", new { id = item.ProjectID }, null)
                         </td>
                     </tr>
                 }
@@ -162,7 +166,7 @@
             <h2>Blogs</h2>
             <hr />
             <p>
-                @Html.ActionLink("Create New", "Create")
+                @Html.ActionLink("Create New", "Create","Blog", null, null)
             </p>
             <table class="table">
                 <tr>
@@ -170,6 +174,7 @@
                     <th>
                         @Html.Label("Blog Title")
                     </th>
+                    <th></th>
                     <th></th>
                 </tr>
 
@@ -181,9 +186,9 @@
                             @Html.DisplayFor(modelItem => item.Content)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.BlogID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.BlogID })
+                            @Html.ActionLink("Edit", "Edit", "Blog", new { id = item.BlogID }, null) |
+                            @Html.ActionLink("Details", "Details", "Blog", new { id = item.BlogID }, null) |
+                            @Html.ActionLink("Delete", "Delete", "Blog", new { id = item.BlogID }, null)
                         </td>
                     </tr>
                 }

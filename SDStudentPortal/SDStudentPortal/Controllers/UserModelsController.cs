@@ -108,7 +108,7 @@ namespace SDStudentPortal.Models
                 userModel.UserId = User.Identity.GetUserId();
                 db.UserModels.Add(userModel);            
                 db.SaveChanges();
-                return RedirectToAction("Create","Uploads");
+                return RedirectToAction("Details","StudentProfiles");
             }
                 return View(userModel);
         }
@@ -127,7 +127,7 @@ namespace SDStudentPortal.Models
                 }
                 else if(user==null)
                 {
-                    return RedirectToAction("Create", "UserModels");
+                    return RedirectToAction("Details", "StudentProfiles");
                 }
                 return View(user);
             }
