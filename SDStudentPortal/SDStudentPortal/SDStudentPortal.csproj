@@ -247,6 +247,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\default-profile-large.png" />
     <Content Include="Images\plus_minus_icons.png" />
+    <Content Include="Images\robertsoncollege-logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="AppSettingsSecrets.config.ignore" />

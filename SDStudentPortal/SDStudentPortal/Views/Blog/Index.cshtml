@@ -4,11 +4,12 @@
 
 @using (Html.BeginForm("Index", "Blog", FormMethod.Get))
 {
-    <div class="form-horizontal" style="text-align:left;padding-top:15px;">
+    <div class="form-horizontal" style="text-align:left;padding-top:15px;margin-bottom:-30px;">
         @Html.Label("Search Blogs")
-        @Html.TextBox("txtSearch")  <input type="submit" value="Search" class="btn btn-default" />
+        @Html.TextBox("txtSearch")  <input type="submit" value="Search" class="btn btn-default" /><br /><br />
     </div>
 }
 
 <br />
+@Html.ActionLink("Create New Blog", "Create")
 @Html.Partial("_IndexPartialPrivate")
